@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "start": "docker-compose up",
+        "end": "docker-compose down"
+    }
+}

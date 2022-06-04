@@ -1,0 +1,6 @@
+docker-compose exec php php /var/www/html/artisan key:generate
+docker-compose exec php php /var/www/html/artisan migrate
+docker-compose exec php php /var/www/html/artisan serve
+docker-compose exec compose compose /var/www/html/artisan migrate
+docker-compose exec mysql mysql -ucyptoProject -p
+cd  ~/Documents/Projects/freelance/allen
