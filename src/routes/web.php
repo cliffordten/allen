@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +41,17 @@ Route::get('/reset', function () {
 Route::get('/settings', function () {
     return view('settings');
 });
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/signup', function () {
-    return view('signup');
-});
+
+
+
+Route::get('/login', [MainController::class, 'login']);
+Route::get('/signup', [MainController::class, 'signup']);
+Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
+
+
+
+
+
 Route::get('/lock', function () {
     return view('lock');
 });

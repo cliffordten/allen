@@ -33,33 +33,6 @@
               <a class="dropdown-item" href="/market-capital-bar">Market Bar</a>
             </div>
           </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Dashboard
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="/wallet">Wallet</a>
-              <a class="dropdown-item" href="/settings">Settings</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Others
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/login">Login</a>
-              <a class="dropdown-item" href="/signup">Sign Up</a>
-              <a class="dropdown-item" href="/lock">Lock</a>
-              <a class="dropdown-item" href="/otp-number">OTP Number</a>
-              <a class="dropdown-item" href="/otp-verify">OTP Verify</a>
-              <a class="dropdown-item" href="/reset">Reset</a>
-              <a class="dropdown-item" href="/notfound">404</a>
-            </div>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item header-custom-icon">
@@ -72,136 +45,29 @@
               <i class="icon ion-md-expand"></i>
             </a>
           </li>
-          <li class="nav-item dropdown header-custom-icon">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <i class="icon ion-md-notifications"></i>
-              <span class="circle-pulse"></span>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-header d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium">6 New Notifications</p>
-                <a href="#!" class="text-muted">Clear all</a>
-              </div>
-              <div class="dropdown-body">
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-md-lock"></i>
-                  </div>
-                  <div class="content">
-                    <p>Account password change</p>
-                    <p class="sub-text text-muted">5 sec ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-md-alert"></i>
-                  </div>
-                  <div class="content">
-                    <p>Solve the security issue</p>
-                    <p class="sub-text text-muted">10 min ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-android"></i>
-                  </div>
-                  <div class="content">
-                    <p>Download android app</p>
-                    <p class="sub-text text-muted">1 hrs ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-bitcoin"></i>
-                  </div>
-                  <div class="content">
-                    <p>Bitcoin price is high now</p>
-                    <p class="sub-text text-muted">2 hrs ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-usd"></i>
-                  </div>
-                  <div class="content">
-                    <p>Payment completed</p>
-                    <p class="sub-text text-muted">4 hrs ago</p>
-                  </div>
-                </a>
-              </div>
-              <div class="dropdown-footer d-flex align-items-center justify-content-center">
-                <a href="#!">View all</a>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item dropdown header-img-icon">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <img src="assets/img/avatar.svg" alt="avatar">
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-header d-flex flex-column align-items-center">
-                <div class="figure mb-3">
-                  <img src="assets/img/avatar.svg" alt="">
-                </div>
-                <div class="info text-center">
-                  <p class="name font-weight-bold mb-0">Tony Stark</p>
-                  <p class="email text-muted mb-3">tonystark@gmail.com</p>
-                </div>
-              </div>
-              <div class="dropdown-body">
-                <ul class="profile-nav">
-                  <li class="nav-item">
-                    <a href="/profile" class="nav-link">
-                      <i class="icon ion-md-person"></i>
-                      <span>Profile</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/wallet" class="nav-link">
-                      <i class="icon ion-md-wallet"></i>
-                      <span>My Wallet</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/settings" class="nav-link">
-                      <i class="icon ion-md-settings"></i>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="exchange-light.html" class="nav-link red">
-                      <i class="icon ion-md-power"></i>
-                      <span>Log Out</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
         </ul>
       </div>
     </nav>
-  </header>
+</header>
   <div class="vh-100 d-flex justify-content-center">
     <div class="form-access my-auto">
-      <form action="/">
+      <form action="{{ route('saveUserInfo') }}" method="post">
+        @csrf
         <span>Create Account</span>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Full Name" required />
+          <input type="text" class="form-control" name="fullName" placeholder="Full Name" required />
         </div>
         <div class="form-group">
-          <input type="email" class="form-control" placeholder="Email Address" required />
+          <input type="email" class="form-control" name="email" placeholder="Email Address" required />
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" required />
+          <input type="password" class="form-control" minlength="8" name="password" placeholder="Password" required />
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Confirm Password" required />
+          <input type="password" class="form-control" minlength="8" name="conformPassword" placeholder="Confirm Password" required />
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="form-checkbox">
+          <input type="checkbox" class="custom-control-input"  name="isTermsChecked" id="form-checkbox" required>
           <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
               Conditions</a></label>
         </div>
