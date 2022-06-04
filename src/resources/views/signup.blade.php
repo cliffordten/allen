@@ -52,8 +52,35 @@
   <div class="vh-100 d-flex justify-content-center">
     <div class="form-access my-auto">
       <form action="{{ route('saveUserInfo') }}" method="post">
+
         @csrf
+
         <span>Create Account</span>
+
+        <div class="row">
+          <div class="col">
+
+            @if(Session::get('success'))
+              <div class="alert alert-success">
+                {{Session::get('success')}}
+              </div>
+            @endif
+
+            @if(Session::get('fail'))
+              <div class="alert alert-danger">
+                {{Session::get('fail')}}
+              </div>
+            @endif
+
+            @if($errors->any())
+              <div class="alert alert-danger">
+                {{ explode('"', $errors)[3] }}
+              </div>
+            @endif
+
+          </div>
+        </div>
+        
         <div class="form-group">
           <input type="text" class="form-control" name="fullName" placeholder="Full Name" required />
         </div>
@@ -64,7 +91,7 @@
           <input type="password" class="form-control" minlength="8" name="password" placeholder="Password" required />
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" minlength="8" name="conformPassword" placeholder="Confirm Password" required />
+          <input type="password" class="form-control" minlength="8" name="confirmPassword" placeholder="Confirm Password" required />
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input"  name="isTermsChecked" id="form-checkbox" required>
