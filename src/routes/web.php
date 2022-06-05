@@ -44,14 +44,19 @@ Route::get('/settings', function () {
 
 
 
-Route::get('/login', [MainController::class, 'login']);
-Route::get('/signup', [MainController::class, 'signup']);
+
 Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
 Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
 Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');
 
-Route::get('/admin/dashboard', [MainController::class, 'adminDashboard']);
-Route::get('/user/dashboard', [MainController::class, 'userDashboard']);
+
+Route::group(['middleware'=>['AuthUser']], function(){
+    Route::get('/login', [MainController::class, 'login']);
+    Route::get('/signup', [MainController::class, 'signup']);
+
+    Route::get('/admin/dashboard', [MainController::class, 'adminDashboard']);
+    Route::get('/user/dashboard', [MainController::class, 'userDashboard']);
+});
 
 
 
