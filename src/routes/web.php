@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,22 @@ use App\Http\Controllers\MainController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', [MainController::class, 'index']);
+Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
+Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
+Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');
+
+
+Route::group(['middleware'=>['AuthUser']], function(){
+    Route::get('/login', [MainController::class, 'login']);
+    Route::get('/signup', [MainController::class, 'signup']);
+
+    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
+
+    Route::get('/user/dashboard', [UserController::class, 'userDashboard']);
 });
+
+
 Route::get('/market-capital-bar', function () {
     return view('market-capital-bar');
 });
@@ -41,26 +56,6 @@ Route::get('/reset', function () {
 Route::get('/settings', function () {
     return view('settings');
 });
-
-
-
-
-Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
-Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
-Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');
-
-
-Route::group(['middleware'=>['AuthUser']], function(){
-    Route::get('/login', [MainController::class, 'login']);
-    Route::get('/signup', [MainController::class, 'signup']);
-
-    Route::get('/admin/dashboard', [MainController::class, 'adminDashboard']);
-    Route::get('/user/dashboard', [MainController::class, 'userDashboard']);
-});
-
-
-
-
 Route::get('/lock', function () {
     return view('lock');
 });

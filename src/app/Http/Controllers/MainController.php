@@ -8,23 +8,19 @@ use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
+
+    function index(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('index', $sessionData);
+    }
+
     function login(){
-        \Log::info("test");
+        // \Log::info("test");
         return view('login');
     }
 
     function signup(){
         return view('signup');
-    }
-
-    function userDashboard(){
-        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
-        return view('user.dashboard', $sessionData);
-    }
-
-    function adminDashboard(){
-        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
-        return view('admin.dashboard', $sessionData);
     }
 
     function logoutUser(){
