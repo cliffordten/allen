@@ -32,6 +32,18 @@ class UserController extends Controller
         //     'isTermsChecked'=>'required',
         // ]);
 
+        $fileLink = '';
+        if($request->hasFile('profile')){
+
+           $fileDestination = 'public/images/profiles';            
+           $file = $request->file('profile');            
+           $fileName = $file->getClientOriginalName();    
+           $fileExtension = $file->getClientOriginalExtension();    
+           $filePath = $file->storeAs($fileDestination, $fileName);
+           
+           $fileLink = "/storage/images/profiles/" . $fileName;
+        }
+
         return $request->input();
     }
     

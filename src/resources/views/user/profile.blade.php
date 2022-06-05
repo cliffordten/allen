@@ -179,7 +179,7 @@
                 <div class="card-body">
                   <h5 class="card-title">General Information</h5>
                   <div class="settings-profile">
-                    <form action="{{ route('updateUserProfile') }}" method="post">
+                    <form action="{{ route('updateUserProfile') }}" method="post" enctype="multipart/form-data">
 
                       @csrf
 
@@ -207,9 +207,9 @@
                         </div>
                       </div>
 
-                      <img src="/assets/img/avatar.svg" alt="avatar">
+                      <img src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar" width=55 height=55 class="rounded-circle">
                       <div class="custom-file">
-                        <input value="{{ $userData['profile'] }}" type="file" class="custom-file-input" name="profile" id="fileUpload" />
+                        <input type="file" class="custom-file-input" name="profile" id="fileUpload" />
                         <label class="custom-file-label" for="fileUpload">Choose avatar</label>
                       </div>
                       <div class="form-row mt-4">
