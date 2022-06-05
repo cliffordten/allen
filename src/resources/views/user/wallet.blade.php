@@ -285,6 +285,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -300,9 +324,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>2.480 BTC</h3>
-                                </div>
+                                @if(!isset($wallets["BTC"]))
+                                  <form action="{{ route('createUserWallet', 'BTC') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create BTC Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["BTC"]))
+                                  <div>
+                                    <h3>{{$wallets['BTC']}} BTC</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -385,6 +417,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -400,9 +456,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>1.334 ETH</h3>
-                                </div>
+                                @if(!isset($wallets["ETH"]))
+                                  <form action="{{ route('createUserWallet', 'ETH') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create ETH Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["ETH"]))
+                                  <div>
+                                    <h3>{{$wallets['ETH']}} ETH</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -485,6 +549,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -500,9 +588,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>0.332 BNB</h3>
-                                </div>
+                                @if(!isset($wallets["BNB"]))
+                                  <form action="{{ route('createUserWallet', 'BNB') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create BNB Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["BNB"]))
+                                  <div>
+                                    <h3>{{$wallets['BNB']}} BNB</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -585,6 +681,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -600,9 +720,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>1.453 TRX</h3>
-                                </div>
+                                @if(!isset($wallets["TRX"]))
+                                  <form action="{{ route('createUserWallet', 'TRX') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create TRX Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["TRX"]))
+                                  <div>
+                                    <h3>{{$wallets['TRX']}} TRX</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -685,6 +813,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -700,9 +852,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>4.445 EOS</h3>
-                                </div>
+                                @if(!isset($wallets["EOS"]))
+                                  <form action="{{ route('createUserWallet', 'EOS') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create EOS Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["EOS"]))
+                                  <div>
+                                    <h3>{{$wallets['EOS']}} EOS</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -785,6 +945,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -800,9 +984,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>2.354 XMR</h3>
-                                </div>
+                                @if(!isset($wallets["XMR"]))
+                                  <form action="{{ route('createUserWallet', 'XMR') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create XMR Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["XMR"]))
+                                  <div>
+                                    <h3>{{$wallets['XMR']}} XMR</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>
@@ -885,6 +1077,30 @@
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title">Balances</h5>
+                                <div class="row">
+                                  <div class="col">
+
+                                    @if(Session::get('success'))
+                                      <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                      </div>
+                                    @endif
+
+                                    @if(Session::get('fail'))
+                                      <div class="alert alert-danger">
+                                        {{Session::get('fail')}}
+                                      </div>
+                                    @endif
+
+                                    @if($errors->any())
+                                      <div class="alert alert-danger">
+                                        {{ explode('"', $errors)[3] }}
+                                      </div>
+                                    @endif
+
+                                  </div>
+                                </div>
+                                
                             <ul>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -900,9 +1116,17 @@
                                   <i class="icon ion-md-checkmark"></i>
                                   <h2>Your Address</h2>
                                 </div>
-                                <div>
-                                  <h3>5.78 KCS</h3>
-                                </div>
+                                @if(!isset($wallets["KCS"]))
+                                  <form action="{{ route('createUserWallet', 'KCS') }}" method="post">
+                                    @csrf
+                                    <input class="btn btn-secondary" type="submit" value="Create KCS Wallet">
+                                  </form>
+                                @endif
+                                @if(isset($wallets["KCS"]))
+                                  <div>
+                                    <h3>{{$wallets['KCS']}}KCS</h3>
+                                  </div>
+                                @endif
                               </li>
                             </ul>
                             <button class="btn green">Deposit</button>

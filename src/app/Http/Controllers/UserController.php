@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Transactions;
+use App\Models\Wallets;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -16,7 +19,26 @@ class UserController extends Controller
     }
 
     function userWallet(){
-        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
+        $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
+
+        $walletObj = null;
+        // $transactionObj = null;
+
+        foreach ($wallets as $val) {
+            $walletObj[$val->currency] = $val->userAddress;
+        }
+
+        // foreach ($transactions as $val) {
+        //     $transactionObj[$val->currency] = $val->userAddress;
+        // }
+
+        $sessionData = [
+            'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(), 
+            'wallets'=> $walletObj,
+            'transactions'=> $transactions
+        ];
+
         return view('user.wallet', $sessionData);
     }
 
@@ -101,6 +123,22 @@ class UserController extends Controller
         $sucess = $userInfo->save();
 
         return back()->with("success", "Password updated!");;
+    }
+
+    function createUserWallet($walletType){
+
+        $wallet = new Wallets;
+        $wallet->userId = session('AuthenticatedUser');
+        $wallet->currency = $walletType;
+        $wallet->amount = '';
+        $wallet->userAddress = (string) Str::uuid();
+        $sucess = $wallet->save();
+
+        if($sucess){
+            return back()->with("success", "Account Created! You can now proceed to login");
+        }
+
+        return back()->with("fail", "Something went wrong, try again later");
     }
     
 }

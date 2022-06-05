@@ -29,6 +29,7 @@ Route::group(['middleware'=>['ClearBrowserCache']], function(){
 });
 
 
+Route::post('/createUserWallet/{walletType}', [UserController::class, 'createUserWallet'])->name('createUserWallet');
 Route::post('/changeUserPassword', [UserController::class, 'changeUserPassword'])->name('changeUserPassword');
 Route::post('/updateUserProfile', [UserController::class, 'updateUserProfile'])->name('updateUserProfile');
 Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
