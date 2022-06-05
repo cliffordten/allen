@@ -16,7 +16,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
+
+
+
+Route::group(['middleware'=>['ClearBrowserCache']], function(){
+    Route::get('/', [MainController::class, 'index']);
+});
+
+
 Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
 Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
 Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');

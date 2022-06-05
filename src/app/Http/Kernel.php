@@ -54,7 +54,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'ClearBrowserCache' => \App\Http\Middleware\AuthUser::class,
+        'ClearBrowserCache' => \App\Http\Middleware\ClearBrowserCache::class,
         'AuthUser' => \App\Http\Middleware\AuthUser::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

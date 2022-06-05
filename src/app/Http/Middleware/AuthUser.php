@@ -16,7 +16,7 @@ class AuthUser
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
+    {\Log::info($request->path());
         if(!session()->has('AuthenticatedUser') && ($request->path() != 'login' && $request->path() != 'signup' )){
             return redirect('login')->with('fail', 'You must be logged in to access this route');
         }
