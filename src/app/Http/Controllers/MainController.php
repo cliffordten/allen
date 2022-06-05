@@ -74,7 +74,7 @@ class MainController extends Controller
         $sucess = $user->save();
 
         if($sucess){
-            return back()->with("success", `Account Created! You can now proceed to login`);
+            return back()->with("success", "Account Created! You can now proceed to login");
         }
 
         return back()->with("fail", "Something went wrong, try again later");

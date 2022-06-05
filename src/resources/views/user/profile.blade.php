@@ -215,11 +215,11 @@
                       <div class="form-row mt-4">
                         <div class="col-md-6">
                           <label class="text-secondary" for="formFirst">First name</label>
-                          <input value="{{ explode(' ', $userData['fullName'])[0] }}" id="formFirst" name="firstName" type="text" class="form-control" placeholder="First name">
+                          <input value="{{ explode(' ', $userData['fullName'])[0] }}" id="formFirst" name="firstName" type="text" class="form-control" placeholder="First name" required>
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="formLast">Last name</label>
-                          <input value="{{ explode(' ', $userData['fullName'])[1] }}" id="formLast" name="lastName" type="text" class="form-control" placeholder="Last name">
+                          <input value="{{ count(explode(' ', $userData['fullName'])) > 1 ? explode(' ', $userData['fullName'])[1]: '' }}" id="formLast" name="lastName" type="text" class="form-control" placeholder="Last name">
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="emailAddress">Email</label>
@@ -227,25 +227,25 @@
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="phoneNumber">Phone</label>
-                          <input value="{{ $userData['phone'] }}" id="phoneNumber" name="phone" type="text" class="form-control" placeholder="Enter phone number">
+                          <input value="{{ $userData['phone'] ? $userData['phone']: '' }}" id="phoneNumber" name="phone" type="text" class="form-control" placeholder="Enter phone number">
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectLanguage">Language</label>
-                          <select id="selectLanguage" name="language" class="custom-select">
-                            <option selected>English</option>
-                            <option>Mandarin Chinese</option>
-                            <option>Spanish</option>
-                            <option>Arabic</option>
-                            <option>Russian</option>
+                          <select id="selectLanguage" name="language" class="custom-select" placeholder="Select Language">
+                            <option selected={{$userData['language'] == 'English'}}>English</option>
+                            <option selected={{$userData['language'] == 'Mandarin Chinese'}}>Mandarin Chinese</option>
+                            <option  selected={{$userData['language'] == 'Spanish'}}>Spanish</option>
+                            <option  selected={{$userData['language'] == 'Arabic'}}>Arabic</option>
+                            <option  selected={{$userData['language'] == 'Russian'}}>Russian</option>
                           </select>
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectCurrency">Currency</label>
-                          <select id="selectCurrency" name="currency" class="custom-select">
-                            <option selected>USD</option>
-                            <option>EUR</option>
-                            <option>GBP</option>
-                            <option>CHF</option>
+                          <select id="selectCurrency" name="currency" class="custom-select" placeholder="Select Currency">
+                            <option  selected={{$userData['language'] == 'USD'}}>USD</option>
+                            <option  selected={{$userData['language'] == 'EUR'}}>EUR</option>
+                            <option  selected={{$userData['language'] == 'GBP'}}>GBP</option>
+                            <option  selected={{$userData['language'] == 'CHF'}}>CHF</option>
                           </select>
                         </div>
                         <div class="col-md-12">

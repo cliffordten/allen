@@ -1,5 +1,9 @@
 (function ($) {
     "use strict";
+
+    $(".alert.alert-success").hide(7000);
+    $(".alert.alert-danger").hide(7000);
+
     // Depth Chart
     function DepthChart() {
         // Add data
