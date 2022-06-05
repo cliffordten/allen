@@ -51,14 +51,41 @@
 </header>
   <div class="vh-100 d-flex justify-content-center">
     <div class="form-access my-auto">
-      <form action="/">
+      <form action="{{ route('loginUser') }}" method="post">
+
         @csrf
+
         <span>Sign In</span>
+
+        <div class="row">
+          <div class="col">
+
+            @if(Session::get('success'))
+              <div class="alert alert-success">
+                {{Session::get('success')}}
+              </div>
+            @endif
+
+            @if(Session::get('fail'))
+              <div class="alert alert-danger">
+                {{Session::get('fail')}}
+              </div>
+            @endif
+
+            @if($errors->any())
+              <div class="alert alert-danger">
+                {{ explode('"', $errors)[3] }}
+              </div>
+            @endif
+
+          </div>
+        </div>
+        
         <div class="form-group">
-          <input type="email" class="form-control" placeholder="Email Address" required />
+          <input type="email" class="form-control" name="email" placeholder="Email Address" required />
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" required />
+          <input type="password" class="form-control" name="password" placeholder="Password" required />
         </div>
         <div class="text-right">
           <a href="/reset">Forgot Password?</a>

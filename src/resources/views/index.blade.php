@@ -33,33 +33,6 @@
               <a class="dropdown-item" href="/market-capital-bar">Market Bar</a>
             </div>
           </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Dashboard
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="/wallet">Wallet</a>
-              <a class="dropdown-item" href="/settings">Settings</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Others
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/login">Login</a>
-              <a class="dropdown-item" href="/signup">Sign Up</a>
-              <a class="dropdown-item" href="/lock">Lock</a>
-              <a class="dropdown-item" href="/otp-number">OTP Number</a>
-              <a class="dropdown-item" href="/otp-verify">OTP Verify</a>
-              <a class="dropdown-item" href="/reset">Reset</a>
-              <a class="dropdown-item" href="/notfound">404</a>
-            </div>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item header-custom-icon">
@@ -135,6 +108,22 @@
               </div>
             </div>
           </li>
+          <li class="nav-item mt-2">
+            <a class="nav-link" href="/login" aria-haspopup="true"
+              aria-expanded="false">
+              Login
+            </a>
+          </li>
+          <li class="nav-item mt-3 text-white">
+                |
+          </li>
+          <li class="nav-item mt-2">
+            <a class="nav-link" href="/signup" aria-haspopup="true"
+              aria-expanded="false">
+              Sign up
+            </a>
+          </li>
+
           <li class="nav-item dropdown header-img-icon">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">

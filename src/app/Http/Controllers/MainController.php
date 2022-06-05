@@ -17,6 +17,23 @@ class MainController extends Controller
         return view('signup');
     }
 
+    function userDashboard(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('user.dashboard', $sessionData);
+    }
+
+    function adminDashboard(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('admin.dashboard', $sessionData);
+    }
+
+    function logoutUser(){
+        if(session()->has('AuthenticatedUser')){
+            session()->pull('AuthenticatedUser');
+        }
+        return redirect('/login');
+    }
+
     function saveUserInfo(Request $request){
 
         // validating requests
@@ -50,28 +67,26 @@ class MainController extends Controller
 
         // validating requests
         $request->validate([
-            'fullName'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:10',
-            'isTermsChecked'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:8',
         ]);
 
-        if($request->password !== $request->confirmPassword){
-            return back()->with("fail", "Passwords do not match!");
+        $userInfo = User::where('email', '=', $request->email)->first();
+
+        if(!$userInfo){
+            return back()->with("fail", "User with this email do not exist!");
         }
 
-        // insert user data in the database;
-        $user = new User;
-        $user->fullName = $request->fullName;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->isTermsChecked = $request->isTermsChecked == 'on'? true: false;
-        $sucess = $user->save();
-
-        if($sucess){
-            return back()->with("success", `Account Created! You can now proceed to login`);
+        if(!(Hash::check($request->password, $userInfo->password))){
+            return back()->with("fail", "Password incorrect!");
         }
 
-        return back()->with("fail", "Something went wrong, try again later");
+        $request->session()->put('AuthenticatedUser', $userInfo->id);
+
+        if($userInfo->isAdmin){
+            return redirect('admin/dashboard');
+        }
+
+        return redirect('user/dashboard');
     }
 }
