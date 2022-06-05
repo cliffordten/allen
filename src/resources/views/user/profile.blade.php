@@ -179,32 +179,59 @@
                 <div class="card-body">
                   <h5 class="card-title">General Information</h5>
                   <div class="settings-profile">
-                    <form action="/">
+                    <form action="{{ route('updateUserProfile') }}" method="post">
+
+                      @csrf
+
+                      <div class="row">
+                        <div class="col">
+
+                          @if(Session::get('success'))
+                            <div class="alert alert-success">
+                              {{Session::get('success')}}
+                            </div>
+                          @endif
+
+                          @if(Session::get('fail'))
+                            <div class="alert alert-danger">
+                              {{Session::get('fail')}}
+                            </div>
+                          @endif
+
+                          @if($errors->any())
+                            <div class="alert alert-danger">
+                              {{ explode('"', $errors)[3] }}
+                            </div>
+                          @endif
+
+                        </div>
+                      </div>
+
                       <img src="/assets/img/avatar.svg" alt="avatar">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileUpload" required />
+                        <input value="{{ $userData['profile'] }}" type="file" class="custom-file-input" name="profile" id="fileUpload" />
                         <label class="custom-file-label" for="fileUpload">Choose avatar</label>
                       </div>
                       <div class="form-row mt-4">
                         <div class="col-md-6">
-                          <label for="formFirst">First name</label>
-                          <input id="formFirst" type="text" class="form-control" placeholder="First name">
+                          <label class="text-secondary" for="formFirst">First name</label>
+                          <input value="{{ explode(' ', $userData['fullName'])[0] }}" id="formFirst" name="firstName" type="text" class="form-control" placeholder="First name">
                         </div>
                         <div class="col-md-6">
-                          <label for="formLast">Last name</label>
-                          <input id="formLast" type="text" class="form-control" placeholder="Last name">
+                          <label class="text-secondary" for="formLast">Last name</label>
+                          <input value="{{ explode(' ', $userData['fullName'])[1] }}" id="formLast" name="lastName" type="text" class="form-control" placeholder="Last name">
                         </div>
                         <div class="col-md-6">
-                          <label for="emailAddress">Email</label>
-                          <input id="emailAddress" type="text" class="form-control" placeholder="Enter your email">
+                          <label class="text-secondary" for="emailAddress">Email</label>
+                          <input value="{{ $userData['email'] }}" id="emailAddress" name="email" type="text" class="form-control" placeholder="Enter your email">
                         </div>
                         <div class="col-md-6">
-                          <label for="phoneNumber">Phone</label>
-                          <input id="phoneNumber" type="text" class="form-control" placeholder="Enter phone number">
+                          <label class="text-secondary" for="phoneNumber">Phone</label>
+                          <input value="{{ $userData['phone'] }}" id="phoneNumber" name="phone" type="text" class="form-control" placeholder="Enter phone number">
                         </div>
                         <div class="col-md-6">
-                          <label for="selectLanguage">Language</label>
-                          <select id="selectLanguage" class="custom-select">
+                          <label class="text-secondary" for="selectLanguage">Language</label>
+                          <select id="selectLanguage" name="language" class="custom-select">
                             <option selected>English</option>
                             <option>Mandarin Chinese</option>
                             <option>Spanish</option>
@@ -213,8 +240,8 @@
                           </select>
                         </div>
                         <div class="col-md-6">
-                          <label for="selectCurrency">Currency</label>
-                          <select id="selectCurrency" class="custom-select">
+                          <label class="text-secondary" for="selectCurrency">Currency</label>
+                          <select id="selectCurrency" name="currency" class="custom-select">
                             <option selected>USD</option>
                             <option>EUR</option>
                             <option>GBP</option>

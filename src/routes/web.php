@@ -29,6 +29,7 @@ Route::group(['middleware'=>['ClearBrowserCache']], function(){
 });
 
 
+Route::post('/updateUserProfile', [UserController::class, 'updateUserProfile'])->name('updateUserProfile');
 Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('saveUserInfo');
 Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
 Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');

@@ -23,5 +23,16 @@ class UserController extends Controller
         $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
         return view('user.settings', $sessionData);
     }
+
+    function updateUserProfile(Request $request){
+        // $request->validate([
+        //     'fullName'=>'required',
+        //     'email'=>'required|email|unique:users',
+        //     'password'=>'required|min:8',
+        //     'isTermsChecked'=>'required',
+        // ]);
+
+        return $request->input();
+    }
     
 }
