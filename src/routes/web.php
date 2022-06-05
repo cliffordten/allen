@@ -35,7 +35,9 @@ Route::group(['middleware'=>['AuthUser']], function(){
 
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
-    Route::get('/user/dashboard', [UserController::class, 'userDashboard']);
+    Route::get('/user/profile', [UserController::class, 'userProfile']);
+    Route::get('/user/wallet', [UserController::class, 'userWallet']);
+    Route::get('/user/settings', [UserController::class, 'userSettings']);
 });
 
 
@@ -51,18 +53,11 @@ Route::get('/markets', function () {
 Route::get('/news-details', function () {
     return view('news-details');
 });
-Route::get('/profile', function () {
-    return view('profile');
-});
-Route::get('/wallet', function () {
-    return view('wallet');
-});
+
 Route::get('/reset', function () {
     return view('reset');
 });
-Route::get('/settings', function () {
-    return view('settings');
-});
+
 Route::get('/lock', function () {
     return view('lock');
 });

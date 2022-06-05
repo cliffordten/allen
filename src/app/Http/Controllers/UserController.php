@@ -9,8 +9,19 @@ class UserController extends Controller
 {
     //
 
-    function userDashboard(){
+    function userProfile(){
         $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
-        return view('user.dashboard', $sessionData);
+        return view('user.profile', $sessionData);
     }
+
+    function userWallet(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('user.wallet', $sessionData);
+    }
+
+    function userSettings(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('user.settings', $sessionData);
+    }
+    
 }

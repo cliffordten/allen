@@ -152,19 +152,19 @@
                 <div class="dropdown-body">
                   <ul class="profile-nav">
                     <li class="nav-item">
-                      <a href="/profile" class="nav-link">
+                      <a href="/user/profile" class="nav-link">
                         <i class="icon ion-md-person"></i>
                         <span>Profile</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/wallet" class="nav-link">
+                      <a href="/user/wallet" class="nav-link">
                         <i class="icon ion-md-wallet"></i>
                         <span>My Wallet</span>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="/settings" class="nav-link">
+                      <a href="/user/settings" class="nav-link">
                         <i class="icon ion-md-settings"></i>
                         <span>Settings</span>
                       </a>

@@ -83,6 +83,6 @@ class MainController extends Controller
             return redirect('admin/dashboard');
         }
 
-        return redirect('user/dashboard');
+        return redirect('user/profile');
     }
 }

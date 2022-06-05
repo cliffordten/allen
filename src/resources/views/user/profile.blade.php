@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Crypo</title>
-  <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body id="dark">
 <header class="dark-bb">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="/"><img src="assets/img/logo-light.svg" alt="logo"></a>
+      <a class="navbar-brand" href="/"><img src="/assets/img/logo-light.svg" alt="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
         aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
         <i class="icon ion-md-menu"></i>
@@ -31,33 +31,6 @@
               <a class="dropdown-item" href="/markets">Markets</a>
               <a class="dropdown-item" href="/market-capital">Market Capital</a>
               <a class="dropdown-item" href="/market-capital-bar">Market Bar</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Dashboard
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="/wallet">Wallet</a>
-              <a class="dropdown-item" href="/settings">Settings</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Others
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/login">Login</a>
-              <a class="dropdown-item" href="/signup">Sign Up</a>
-              <a class="dropdown-item" href="/lock">Lock</a>
-              <a class="dropdown-item" href="/otp-number">OTP Number</a>
-              <a class="dropdown-item" href="/otp-verify">OTP Verify</a>
-              <a class="dropdown-item" href="/reset">Reset</a>
-              <a class="dropdown-item" href="/notfound">404</a>
             </div>
           </li>
         </ul>
@@ -138,40 +111,40 @@
           <li class="nav-item dropdown header-img-icon">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              <img src="assets/img/avatar.svg" alt="avatar">
+              <img src="/assets/img/avatar.svg" alt="avatar">
             </a>
             <div class="dropdown-menu">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="figure mb-3">
-                  <img src="assets/img/avatar.svg" alt="">
+                  <img src="/assets/img/avatar.svg" alt="">
                 </div>
                 <div class="info text-center">
-                  <p class="name font-weight-bold mb-0">Tony Stark</p>
-                  <p class="email text-muted mb-3">tonystark@gmail.com</p>
+                  <p class="name font-weight-bold mb-0">{{$userData['fullName']}}</p>
+                  <p class="email text-muted mb-3">{{$userData['email']}}</p>
                 </div>
               </div>
               <div class="dropdown-body">
                 <ul class="profile-nav">
                   <li class="nav-item">
-                    <a href="/profile" class="nav-link">
+                    <a href="/user/profile" class="nav-link">
                       <i class="icon ion-md-person"></i>
                       <span>Profile</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/wallet" class="nav-link">
+                    <a href="/user/wallet" class="nav-link">
                       <i class="icon ion-md-wallet"></i>
                       <span>My Wallet</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/settings" class="nav-link">
+                    <a href="/user/settings" class="nav-link">
                       <i class="icon ion-md-settings"></i>
                       <span>Settings</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="exchange-light.html" class="nav-link red">
+                    <a href="{{ route('logoutUser') }}" class="nav-link red">
                       <i class="icon ion-md-power"></i>
                       <span>Log Out</span>
                     </a>
@@ -183,16 +156,16 @@
         </ul>
       </div>
     </nav>
-  </header>
+</header>
   <div class="settings mtb15">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 col-lg-3">
           <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
-            <a class="nav-link" id="settings-profile-tab" data-toggle="pill" href="#settings-profile" role="tab"
+            <a class="nav-link active" id="settings-profile-tab" data-toggle="pill" href="#settings-profile" role="tab"
               aria-controls="settings-profile" aria-selected="true"><i class="icon ion-md-person"></i> Profile</a>
-            <a class="nav-link active" id="settings-wallet-tab" data-toggle="pill" href="#settings-wallet" role="tab"
+            <a class="nav-link" id="settings-wallet-tab" data-toggle="pill" href="#settings-wallet" role="tab"
               aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i> Wallet</a>
             <a class="nav-link" id="settings-tab" data-toggle="pill" href="#settings" role="tab"
               aria-controls="settings" aria-selected="false"><i class="icon ion-md-settings"></i> Settings</a>
@@ -200,13 +173,14 @@
         </div>
         <div class="col-md-12 col-lg-9">
           <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade" id="settings-profile" role="tabpanel" aria-labelledby="settings-profile-tab">
+            <div class="tab-pane fade show active" id="settings-profile" role="tabpanel"
+              aria-labelledby="settings-profile-tab">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">General Information</h5>
                   <div class="settings-profile">
                     <form action="/">
-                      <img src="assets/img/avatar.svg" alt="avatar">
+                      <img src="/assets/img/avatar.svg" alt="avatar">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="fileUpload" required />
                         <label class="custom-file-label" for="fileUpload">Choose avatar</label>
@@ -319,8 +293,7 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade show active" id="settings-wallet" role="tabpanel"
-              aria-labelledby="settings-wallet-tab">
+            <div class="tab-pane fade" id="settings-wallet" role="tabpanel" aria-labelledby="settings-wallet-tab">
               <div class="wallet">
                 <div class="row">
                   <div class="col-md-12 col-lg-4">
@@ -328,7 +301,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center active" data-toggle="pill"
                         href="#coinBTC" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/18.png" alt="btc">
+                          <img src="/assets/img/icon/18.png" alt="btc">
                           <div>
                             <h2>BTC</h2>
                             <p>Bitcoin</p>
@@ -342,7 +315,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinETH" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/1.png" alt="btc">
+                          <img src="/assets/img/icon/1.png" alt="btc">
                           <div>
                             <h2>ETH</h2>
                             <p>Ethereum</p>
@@ -356,7 +329,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinBNB" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/9.png" alt="btc">
+                          <img src="/assets/img/icon/9.png" alt="btc">
                           <div>
                             <h2>BNB</h2>
                             <p>Binance</p>
@@ -370,7 +343,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinTRX" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/6.png" alt="btc">
+                          <img src="/assets/img/icon/6.png" alt="btc">
                           <div>
                             <h2>TRX</h2>
                             <p>Tron</p>
@@ -384,7 +357,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinEOS" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/2.png" alt="btc">
+                          <img src="/assets/img/icon/2.png" alt="btc">
                           <div>
                             <h2>EOS</h2>
                             <p>Eosio</p>
@@ -398,7 +371,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinXMR" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/7.png" alt="btc">
+                          <img src="/assets/img/icon/7.png" alt="btc">
                           <div>
                             <h2>XMR</h2>
                             <p>Monero</p>
@@ -412,7 +385,7 @@
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
                         href="#coinKCS" role="tab" aria-selected="true">
                         <div class="d-flex">
-                          <img src="assets/img/icon/4.png" alt="btc">
+                          <img src="/assets/img/icon/4.png" alt="btc">
                           <div>
                             <h2>KCS</h2>
                             <p>Kstarcoin</p>
@@ -471,7 +444,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -570,7 +543,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -669,7 +642,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -768,7 +741,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -867,7 +840,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -966,7 +939,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -1065,7 +1038,7 @@
                                 </div>
                               </div>
                               <div class="col-md-4">
-                                <img src="assets/img/qr-code-light.svg" alt="qr-code">
+                                <img src="/assets/img/qr-code-light.svg" alt="qr-code">
                               </div>
                             </div>
                           </div>
@@ -1274,12 +1247,12 @@
     </div>
   </div>
 
-  <script src="assets/js/jquery-3.4.1.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/amcharts-core.min.js"></script>
-  <script src="assets/js/amcharts.min.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="/assets/js/jquery-3.4.1.min.js"></script>
+  <script src="/assets/js/popper.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/amcharts-core.min.js"></script>
+  <script src="/assets/js/amcharts.min.js"></script>
+  <script src="/assets/js/custom.js"></script>
 </body>
 
 </html>
