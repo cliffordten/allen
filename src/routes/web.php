@@ -25,6 +25,7 @@ Route::group(['middleware'=>['ClearBrowserCache']], function(){
     Route::get('/market-capital', [MainController::class, 'marketCapital']);
     Route::get('/markets', [MainController::class, 'market']);
     Route::get('/news-details', [MainController::class, 'newsDetails']);
+    Route::get('/notfound', [MainController::class, 'render404']);
 });
 
 
@@ -58,6 +59,4 @@ Route::get('/otp-number', function () {
 Route::get('/otp-verify', function () {
     return view('otp-verify');
 });
-Route::get('/notfound', function () {
-    return view('notfound');
-});
+

@@ -42,6 +42,10 @@ class MainController extends Controller
         return view('signup');
     }
 
+    function render404(){
+        return abort(404);
+    }
+
     function logoutUser(){
         if(session()->has('AuthenticatedUser')){
             session()->pull('AuthenticatedUser');
