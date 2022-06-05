@@ -260,52 +260,28 @@
                 <div class="card-body">
                   <h5 class="card-title">Change Password</h5>
                   <div class="settings-profile">
-                    <form action="/">
+                    <form action="{{ route('changeUserPassword') }}" method="post">
 
                       @csrf
-
-                      <div class="row">
-                        <div class="col">
-
-                          @if(Session::get('success'))
-                            <div class="alert alert-success">
-                              {{Session::get('success')}}
-                            </div>
-                          @endif
-
-                          @if(Session::get('fail'))
-                            <div class="alert alert-danger">
-                              {{Session::get('fail')}}
-                            </div>
-                          @endif
-
-                          @if($errors->any())
-                            <div class="alert alert-danger">
-                              {{ explode('"', $errors)[3] }}
-                            </div>
-                          @endif
-
-                        </div>
-                      </div>
 
                       <div class="form-row">
                         <div class="col-md-6">
                           <label for="password">Current password</label>
-                          <input name="password" id="password" type="text" class="form-control" placeholder="Enter your password" required />
+                          <input name="password" id="password" type="password" class="form-control" placeholder="Enter your password" required />
                         </div>
                         <div class="col-md-6">
                         </div>
                 
                         <div class="col-md-6">
                           <label for="newPass">New password</label>
-                          <input name="newPass" id="newPass" type="text" class="form-control" placeholder="Enter new password">
+                          <input name="newPass" id="newPass" type="password" class="form-control" placeholder="Enter new password">
                         </div>
                         <div class="col-md-6">
                        </div>
 
                         <div class="col-md-6">
                           <label for="confirmPass">Confirm password</label>
-                          <input name="confirmPass" id="confirmPass" type="text" class="form-control" placeholder="Enter new password">
+                          <input name="confirmPass" id="confirmPass" type="password" class="form-control" placeholder="Enter new password">
                         </div>
                         <div class="col-md-6">
                         </div>

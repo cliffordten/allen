@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -75,6 +76,31 @@ class UserController extends Controller
         $sucess = $userInfo->save();
 
         return back()->with("success", "Account info updated!");;
+    }
+    
+    function changeUserPassword(Request $request){
+
+        $request->validate([
+            'password'=>'required|min:8',
+            'newPass'=>'required|min:8',
+            'confirmPass'=>'required|min:8',
+        ]);
+
+        if($request->newPass !== $request->confirmPass){
+            return back()->with("fail", "New Passwords do not match!");
+        }
+
+        $userInfo = User::where('id', '=', session('AuthenticatedUser'))->first();
+
+        if(!(Hash::check($request->password, $userInfo->password))){
+            return back()->with("fail", "Old Password incorrect!");
+        }
+
+        
+        $userInfo->password = Hash::make($request->newPass);
+        $sucess = $userInfo->save();
+
+        return back()->with("success", "Password updated!");;
     }
     
 }
