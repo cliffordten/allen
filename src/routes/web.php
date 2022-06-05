@@ -21,6 +21,10 @@ use App\Http\Controllers\UserController;
 
 Route::group(['middleware'=>['ClearBrowserCache']], function(){
     Route::get('/', [MainController::class, 'index']);
+    Route::get('/market-capital-bar', [MainController::class, 'marketCapitalBar']);
+    Route::get('/market-capital', [MainController::class, 'marketCapital']);
+    Route::get('/markets', [MainController::class, 'market']);
+    Route::get('/news-details', [MainController::class, 'newsDetails']);
 });
 
 
@@ -40,19 +44,6 @@ Route::group(['middleware'=>['AuthUser']], function(){
     Route::get('/user/settings', [UserController::class, 'userSettings']);
 });
 
-
-Route::get('/market-capital-bar', function () {
-    return view('market-capital-bar');
-});
-Route::get('/market-capital', function () {
-    return view('market-capital');
-});
-Route::get('/markets', function () {
-    return view('markets');
-});
-Route::get('/news-details', function () {
-    return view('news-details');
-});
 
 Route::get('/reset', function () {
     return view('reset');

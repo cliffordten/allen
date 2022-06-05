@@ -11,7 +11,7 @@
 </head>
 
 <body id="dark">
-  <header class="dark-bb">
+<header class="dark-bb">
     <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="/"><img src="assets/img/logo-light.svg" alt="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
@@ -183,7 +183,7 @@
         </ul>
       </div>
     </nav>
-  </header>
+</header>
   <div class="container-fluid mtb15 no-fluid">
     <div class="row sm-gutters">
       <div class="col-md-3">

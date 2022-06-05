@@ -14,8 +14,27 @@ class MainController extends Controller
         return view('index', $sessionData);
     }
 
+    function market(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('markets', $sessionData);
+    }
+
+    function marketCapital(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('market-capital', $sessionData);
+    }
+
+    function marketCapitalBar(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('market-capital-bar', $sessionData);
+    }
+
+    function newsDetails(){
+        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
+        return view('news-details', $sessionData);
+    }
+
     function login(){
-        // \Log::info("test");
         return view('login');
     }
 
@@ -32,7 +51,6 @@ class MainController extends Controller
 
     function saveUserInfo(Request $request){
 
-        // validating requests
         $request->validate([
             'fullName'=>'required',
             'email'=>'required|email|unique:users',
@@ -44,7 +62,6 @@ class MainController extends Controller
             return back()->with("fail", "Passwords do not match!");
         }
 
-        // insert user data in the database;
         $user = new User;
         $user->fullName = $request->fullName;
         $user->email = $request->email;
@@ -61,7 +78,6 @@ class MainController extends Controller
 
     function loginUser(Request $request){
 
-        // validating requests
         $request->validate([
             'email'=>'required|email',
             'password'=>'required|min:8',
