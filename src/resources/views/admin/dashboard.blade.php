@@ -111,12 +111,12 @@
           <li class="nav-item dropdown header-img-icon">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              <img src="/assets/img/avatar.svg" alt="avatar">
+              <img width=65 height=65 class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
             </a>
             <div class="dropdown-menu">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="figure mb-3">
-                  <img src="/assets/img/avatar.svg" alt="">
+                  <img width=65 height=65 class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="">
                 </div>
                 <div class="info text-center">
                   <p class="name font-weight-bold mb-0">Welcome Admin</p>
