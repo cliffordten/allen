@@ -1,6 +1,10 @@
 {
-    "scripts": {
-        "start": "docker-compose up",
-        "end": "docker-compose down"
-    }
+  "scripts": {
+    "build": "docker-compose build",
+    "start": "docker-compose up",
+    "end": "docker-compose down",
+    "build:linux": "sudo docker-compose build",
+    "start:linux": "sudo docker-compose up",
+    "end:linux": "sudo docker-compose down"
+  }
 }

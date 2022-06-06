@@ -1,8 +1,24 @@
 (function ($) {
     "use strict";
 
-    $(".alert.alert-success").hide(7000);
-    $(".alert.alert-danger").hide(7000);
+    
+
+    if ($(".alert.alert-success").length) {
+        
+        setTimeout(function() {
+            $(".alert.alert-success").fadeOut('fast');
+        }, 4000);
+
+    }
+
+    if ($(".alert.alert-danger").length) {
+
+        setTimeout(function() {
+            $(".alert.alert-danger").fadeOut('fast');
+        }, 4000);
+
+    }
+
 
     // Depth Chart
     function DepthChart() {

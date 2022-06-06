@@ -1,8 +1,25 @@
-docker-compose exec php php /var/www/html/artisan key:generate
-docker-compose exec php php /var/www/html/artisan migrate
-docker-compose exec php php /var/www/html/artisan serve
-docker-compose exec compose compose /var/www/html/artisan migrate
-docker-compose exec mysql mysql -ucyptoProject -p
+sudo docker-compose exec php php /var/www/html/artisan key:generate
+sudo docker-compose exec php php /var/www/html/artisan migrate
+sudo docker-compose exec php php /var/www/html/artisan serve
+sudo docker-compose exec composer composer install
+sudo docker-compose exec mysql mysql -ucyptoProject -p
 cd  ~/Documents/Projects/freelance/allen
-docker-compose exec php php /var/www/html/artisan migrate:fresh
-docker-compose exec php php artisan make:migration add_other_users_feild --table="users"
+sudo docker-compose exec php php /var/www/html/artisan migrate:fresh
+sudo docker-compose exec php php artisan make:migration add_other_users_feild --table="users"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.youtube.com/watch?v=5N6gTVCG_rw
+https://www.youtube.com/watch?v=G5Nk4VykcUw

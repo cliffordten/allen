@@ -69,6 +69,10 @@ class MainController extends Controller
         $user = new User;
         $user->fullName = $request->fullName;
         $user->email = $request->email;
+        $user->phone="";
+        $user->language="";
+        $user->currency="";
+        $user->profile="";
         $user->password = Hash::make($request->password);
         $user->isTermsChecked = $request->isTermsChecked == 'on'? true: false;
         $sucess = $user->save();
