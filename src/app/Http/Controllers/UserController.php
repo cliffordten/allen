@@ -8,6 +8,7 @@ use App\Models\Transactions;
 use App\Models\Wallets;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -19,6 +20,16 @@ class UserController extends Controller
     }
 
     function userWallet(){
+
+        if(!session('transactionInfo')){
+            $transactionInfo = null;
+            $transactionInfo['currency'] = null;
+            $transactionInfo['type'] = null;
+            $transactionInfo['BTC'] = true;
+
+            Session::put('transactionInfo', $transactionInfo);
+        }
+
         $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
         $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
 
@@ -142,5 +153,14 @@ class UserController extends Controller
 
         return back()->with("fail", "Something went wrong, try again later");
     }
-    
+
+    function makeTransaction($currencyType, $transactionType){
+        $transactionInfo = null;
+        $transactionInfo['currency'] = $currencyType;
+        $transactionInfo['type'] = $transactionType;
+        $transactionInfo[$currencyType] = true;
+
+        Session::put('transactionInfo', $transactionInfo);
+        return back();
+    }
 }
