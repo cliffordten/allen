@@ -21,13 +21,6 @@ class UserController extends Controller
 
     function userWallet(){
 
-        if(!session('transactionInfo')){
-            $transactionInfo = null;
-            $transactionInfo['currency'] = "BTC";
-
-            Session::put('transactionInfo', $transactionInfo);
-        }
-
         $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
         $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
 
@@ -39,6 +32,14 @@ class UserController extends Controller
             $transactionObj[$val->currency] = $transactions -> filter(function($currentVal){
                                                 return $currentVal["currency"] == $val->currency;
                                             }) -> values();
+        }
+
+        if(!session('transactionInfo')){
+            $transactionInfo = null;
+            $transactionInfo['currency'] = "BTC";
+            $transactionInfo['displayAmount'] = isset($walletObj["BTC"]) ? $walletObj["BTC"]['amount'] . " BTC" : "0.00000 BTC";
+
+            Session::put('transactionInfo', $transactionInfo);
         }
 
         // var_dump($transactionObj);
@@ -163,8 +164,17 @@ class UserController extends Controller
     }
 
     function selectCurrency(Request $request){
+        $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
         $transactionInfo = null;
         $transactionInfo['currency'] = $request->currency;
+
+        $walletObj = null;
+
+        foreach ($wallets as $val) {
+            $walletObj[$val->currency] = $val;
+        }
+
+        $transactionInfo['displayAmount'] = isset($walletObj[$request->currency]) ? $walletObj[$request->currency]['amount'] . " ". $request->currency: "0.00000 ". $request->currency;
 
         Session::put('transactionInfo', $transactionInfo);
 

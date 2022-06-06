@@ -35,6 +35,9 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <a class="nav-link mt-2">
+          {{Session::get('transactionInfo')['displayAmount']}}
+        </a>
           <li class="nav-item header-custom-icon">
             <a class="nav-link" href="#" id="changeThemeLight">
               <i class="icon ion-md-sunny"></i>
