@@ -23,15 +23,17 @@ class UserController extends Controller
         $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
 
         $walletObj = null;
-        // $transactionObj = null;
+        $transactionObj = null;
 
         foreach ($wallets as $val) {
-            $walletObj[$val->currency] = $val->userAddress;
+            $walletObj[$val->currency] = $val;
+            $transactionObj[$val->currency] = $transactions -> filter(function($currentVal){
+                                                return $currentVal["currency"] == $val->currency;
+                                            }) -> values();
         }
 
-        // foreach ($transactions as $val) {
-        //     $transactionObj[$val->currency] = $val->userAddress;
-        // }
+        // var_dump($transactionObj);
+        // return;
 
         $sessionData = [
             'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(), 
@@ -130,12 +132,12 @@ class UserController extends Controller
         $wallet = new Wallets;
         $wallet->userId = session('AuthenticatedUser');
         $wallet->currency = $walletType;
-        $wallet->amount = '';
+        $wallet->amount = '0.0000000';
         $wallet->userAddress = (string) Str::uuid();
         $sucess = $wallet->save();
 
         if($sucess){
-            return back()->with("success", "Account Created! You can now proceed to login");
+            return back()->with("success", $walletType . " Wallet Created! You can now start making transations");
         }
 
         return back()->with("fail", "Something went wrong, try again later");

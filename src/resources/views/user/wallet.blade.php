@@ -190,7 +190,7 @@
                         </div>
                         <div>
                           <h3>4.5484254</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["BTC"]) ? $wallets["BTC"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -204,7 +204,7 @@
                         </div>
                         <div>
                           <h3>13.454845</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["ETH"]) ? $wallets["ETH"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -218,7 +218,7 @@
                         </div>
                         <div>
                           <h3>35.4842458</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["BNB"]) ? $wallets["BNB"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -232,7 +232,7 @@
                         </div>
                         <div>
                           <h3>4.458941</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["TRX"]) ? $wallets["TRX"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -246,7 +246,7 @@
                         </div>
                         <div>
                           <h3>33.478951</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["EOS"]) ? $wallets["EOS"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -260,7 +260,7 @@
                         </div>
                         <div>
                           <h3>99.465975</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["XMR"]) ? $wallets["XMR"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                       <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"
@@ -274,7 +274,7 @@
                         </div>
                         <div>
                           <h3>114.57564</h3>
-                          <p class="text-right"><i class="icon ion-md-lock"></i> 0.0000000</p>
+                          <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["KCS"]) ? $wallets["KCS"]["amount"] : "0.0000000"}}</p>
                         </div>
                       </a>
                     </div>
@@ -315,9 +315,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>5.5894 BTC</h3>
-                                </div>
+                                @if(isset($wallets["BTC"]))
+                                  <div>
+                                    <h3>{{$wallets["BTC"]["amount"]}} BTC</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["BTC"]))
+                                  <div>
+                                    <h3 class="text-secondary">No BTC wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -332,7 +340,7 @@
                                 @endif
                                 @if(isset($wallets["BTC"]))
                                   <div>
-                                    <h3>{{$wallets['BTC']}} BTC</h3>
+                                    <h3>{{$wallets['BTC']['userAddress']}} BTC</h3>
                                   </div>
                                 @endif
                               </li>
@@ -447,9 +455,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>4.1542 ETH</h3>
-                                </div>
+                                @if(isset($wallets["ETH"]))
+                                  <div>
+                                    <h3>{{$wallets["ETH"]["amount"]}} ETH</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["ETH"]))
+                                  <div>
+                                    <h3 class="text-secondary">No ETH wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -464,7 +480,7 @@
                                 @endif
                                 @if(isset($wallets["ETH"]))
                                   <div>
-                                    <h3>{{$wallets['ETH']}} ETH</h3>
+                                    <h3>{{$wallets['ETH']['userAddress']}} ETH</h3>
                                   </div>
                                 @endif
                               </li>
@@ -579,9 +595,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>7.342 BNB</h3>
-                                </div>
+                                @if(isset($wallets["BNB"]))
+                                  <div>
+                                    <h3>{{$wallets["BNB"]["amount"]}} BNB</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["BNB"]))
+                                  <div>
+                                    <h3 class="text-secondary">No BNB wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -596,7 +620,7 @@
                                 @endif
                                 @if(isset($wallets["BNB"]))
                                   <div>
-                                    <h3>{{$wallets['BNB']}} BNB</h3>
+                                    <h3>{{$wallets['BNB']['userAddress']}} BNB</h3>
                                   </div>
                                 @endif
                               </li>
@@ -711,9 +735,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>4.3344 TRX</h3>
-                                </div>
+                                @if(isset($wallets["TRX"]))
+                                  <div>
+                                    <h3>4{{$wallets["TRX"]["amount"]}} TRX</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["TRX"]))
+                                  <div>
+                                    <h3 class="text-secondary">No TRX wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -728,7 +760,7 @@
                                 @endif
                                 @if(isset($wallets["TRX"]))
                                   <div>
-                                    <h3>{{$wallets['TRX']}} TRX</h3>
+                                    <h3>{{$wallets['TRX']['userAddress']}} TRX</h3>
                                   </div>
                                 @endif
                               </li>
@@ -843,9 +875,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>33.35 EOS</h3>
-                                </div>
+                                @if(isset($wallets["EOS"]))
+                                  <div>
+                                    <h3>{{$wallets["EOS"]["amount"]}} EOS</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["EOS"]))
+                                  <div>
+                                    <h3 class="text-secondary">No EOS wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -860,7 +900,7 @@
                                 @endif
                                 @if(isset($wallets["EOS"]))
                                   <div>
-                                    <h3>{{$wallets['EOS']}} EOS</h3>
+                                    <h3>{{$wallets['EOS']['userAddress']}} EOS</h3>
                                   </div>
                                 @endif
                               </li>
@@ -975,9 +1015,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>34.333 XMR</h3>
-                                </div>
+                                @if(isset($wallets["XMR"]))
+                                  <div>
+                                    <h3>{{$wallets["XMR"]["amount"]}} XMR</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["XMR"]))
+                                  <div>
+                                    <h3 class="text-secondary">No XMR wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -992,7 +1040,7 @@
                                 @endif
                                 @if(isset($wallets["XMR"]))
                                   <div>
-                                    <h3>{{$wallets['XMR']}} XMR</h3>
+                                    <h3>{{$wallets['XMR']['userAddress']}} XMR</h3>
                                   </div>
                                 @endif
                               </li>
@@ -1107,9 +1155,17 @@
                                   <i class="icon ion-md-cash"></i>
                                   <h2>Total Equity</h2>
                                 </div>
-                                <div>
-                                  <h3>86.577 KCS</h3>
-                                </div>
+                                @if(isset($wallets["KCS"]))
+                                  <div>
+                                    <h3>{{$wallets["KCS"]["amount"]}} KCS</h3>
+                                  </div>
+                                @endif
+
+                                @if(!isset($wallets["KCS"]))
+                                  <div>
+                                    <h3 class="text-secondary">No KCS wallet found</h3>
+                                  </div>
+                                @endif
                               </li>
                               <li class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
@@ -1124,7 +1180,7 @@
                                 @endif
                                 @if(isset($wallets["KCS"]))
                                   <div>
-                                    <h3>{{$wallets['KCS']}}KCS</h3>
+                                    <h3>{{$wallets['KCS']['userAddress']}} KCS</h3>
                                   </div>
                                 @endif
                               </li>
