@@ -154,10 +154,19 @@ class UserController extends Controller
     }
 
     function makeTransaction($currencyType, $transactionType){
+        $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
         $transactionInfo = null;
         $transactionInfo['currency'] = $currencyType;
         $transactionInfo['type'] = $transactionType;
         $transactionInfo[$currencyType] = true;
+
+        $walletObj = null;
+
+        foreach ($wallets as $val) {
+            $walletObj[$val->currency] = $val;
+        }
+
+        $transactionInfo['displayAmount'] = isset($walletObj[$currencyType]) ? $walletObj[$currencyType]['amount'] . " ". $currencyType: "0.00000 ". $currencyType;
 
         Session::put('transactionInfo', $transactionInfo);
         return back();

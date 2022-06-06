@@ -5,6 +5,7 @@ sudo docker-compose exec composer composer install
 sudo docker-compose exec mysql mysql -ucyptoProject -p
 cd  ~/Documents/Projects/freelance/allen
 sudo docker-compose exec php php /var/www/html/artisan migrate:fresh
+sudo docker-compose exec php php /var/www/html/artisan storage:link
 sudo docker-compose exec php php artisan make:migration add_other_users_feild --table="users"
 
 

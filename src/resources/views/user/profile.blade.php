@@ -35,6 +35,9 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <a class="nav-link mt-2">
+          {{Session::get('transactionInfo')['displayAmount']}}
+        </a>
           <li class="nav-item header-custom-icon">
             <a class="nav-link" href="#" id="changeThemeLight">
               <i class="icon ion-md-sunny"></i>
@@ -111,12 +114,12 @@
           <li class="nav-item dropdown header-img-icon">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              <img width=65 height=65 class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+              <img style="width:40px;height:40px" class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
             </a>
             <div class="dropdown-menu">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="figure mb-3">
-                  <img width=65 height=65 class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="">
+                  <img style="width:40px;height:40px" class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="">
                 </div>
                 <div class="info text-center">
                   <p class="name font-weight-bold mb-0">{{$userData['fullName']}}</p>
@@ -207,7 +210,7 @@
                         </div>
                       </div>
 
-                      <img width=55 height=55 class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+                      <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" name="profile" id="fileUpload" />
                         <label class="custom-file-label" for="fileUpload">Choose avatar</label>
@@ -232,20 +235,20 @@
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectLanguage">Language</label>
                           <select id="selectLanguage" name="language" class="custom-select" placeholder="Select Language">
-                            <option selected={{$userData['language'] == 'English'}}>English</option>
-                            <option selected={{$userData['language'] == 'Mandarin Chinese'}}>Mandarin Chinese</option>
-                            <option  selected={{$userData['language'] == 'Spanish'}}>Spanish</option>
-                            <option  selected={{$userData['language'] == 'Arabic'}}>Arabic</option>
-                            <option  selected={{$userData['language'] == 'Russian'}}>Russian</option>
+                            <option {{$userData['language'] == "Mandarin Chinese"? "selected": ""}}>Mandarin Chinese</option>
+                            <option  {{$userData['language'] == "Spanish"? "selected": ""}}>Spanish</option>
+                            <option  {{$userData['language'] == "Arabic"? "selected": ""}}>Arabic</option>
+                            <option  {{$userData['language'] == "Russian"? "selected": ""}}>Russian</option>
+                            <option {{$userData['language'] == "English"? "selected": ""}}>English</option>
                           </select>
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectCurrency">Currency</label>
                           <select id="selectCurrency" name="currency" class="custom-select" placeholder="Select Currency">
-                            <option  selected={{$userData['language'] == 'USD'}}>USD</option>
-                            <option  selected={{$userData['language'] == 'EUR'}}>EUR</option>
-                            <option  selected={{$userData['language'] == 'GBP'}}>GBP</option>
-                            <option  selected={{$userData['language'] == 'CHF'}}>CHF</option>
+                            <option {{$userData['currency'] == 'EUR'? "selected": ""}}>EUR</option>
+                            <option {{$userData['currency'] == 'GBP'? "selected": ""}}>GBP</option>
+                            <option {{$userData['currency'] == 'CHF'? "selected": ""}}>CHF</option>
+                            <option {{$userData['currency'] == 'USD'? "selected": ""}}>USD</option>
                           </select>
                         </div>
                         <div class="col-md-12">
