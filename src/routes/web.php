@@ -29,6 +29,8 @@ Route::group(['middleware'=>['ClearBrowserCache']], function(){
 });
 
 
+Route::post('/selectCurrency', [UserController::class, 'selectCurrency'])->name('selectCurrency');
+Route::post('/processTransaction', [UserController::class, 'processTransaction'])->name('processTransaction');
 Route::get('/makeTransaction/{currencyType}/{transactionType}', [UserController::class, 'makeTransaction'])->name('makeTransaction');
 Route::post('/createUserWallet/{walletType}', [UserController::class, 'createUserWallet'])->name('createUserWallet');
 Route::post('/changeUserPassword', [UserController::class, 'changeUserPassword'])->name('changeUserPassword');

@@ -23,9 +23,7 @@ class UserController extends Controller
 
         if(!session('transactionInfo')){
             $transactionInfo = null;
-            $transactionInfo['currency'] = null;
-            $transactionInfo['type'] = null;
-            $transactionInfo['BTC'] = true;
+            $transactionInfo['currency'] = "BTC";
 
             Session::put('transactionInfo', $transactionInfo);
         }
@@ -162,5 +160,21 @@ class UserController extends Controller
 
         Session::put('transactionInfo', $transactionInfo);
         return back();
+    }
+
+    function selectCurrency(Request $request){
+        $transactionInfo = null;
+        $transactionInfo['currency'] = $request->currency;
+
+        Session::put('transactionInfo', $transactionInfo);
+
+        return back();
+    }
+
+    function processTransaction(Request $request){
+        // if(session()->has('transactionInfo')){
+        //     session()->pull('transactionInfo');
+        // }
+        return $request -> input();
     }
 }

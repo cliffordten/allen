@@ -11,6 +11,22 @@
 
     }
 
+    $('#fileUpload').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
+
+    //  $('.aBtn').on('click', function () {
+
+    //     //fire the submit event on the form
+    //     $('#toogleCurrency').trigger('submit');
+
+    //     //stop the default behavior of the link
+    //     return false;
+    // });
+
     if ($(".alert.alert-danger").length) {
 
         setTimeout(function() {
