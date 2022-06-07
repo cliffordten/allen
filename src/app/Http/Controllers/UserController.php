@@ -26,10 +26,10 @@ class UserController extends Controller
 
         foreach ($transactions as $trans) {
             $senderWallet = Wallets::where('userAddress', '=', $trans->senderAddress)->first();
-            $sender = $senderWallet? User::where('id', '=', $senderWallet->userId)-first(): null;
-            $transaction['senderName'] = $sender ? $sender->fullName: null;
+            $sender = $senderWallet? User::where('id', '=', $senderWallet->userId)->first(): null;
+            $trans['senderName'] = $sender ? $sender->fullName: null;
         }
-        
+
         $walletObj = null;
         $transactionObj = null;
         
@@ -53,7 +53,7 @@ class UserController extends Controller
     function userTransactionHistory(){
         $sessionData = [
             'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(),
-            'transactionHistory'=>Transactions::orderBy('id', 'DESC')->get()
+            'transactionHistory'=>Transactions::orderBy('id', 'DESC')->where('userId', '=', session('AuthenticatedUser'))->get()
         ];
         return view('user.transactionHistory', $sessionData);
     }
@@ -195,12 +195,13 @@ class UserController extends Controller
         $transaction = new Transactions;
 
         $walletObj = null;
+        $fileLink='';
 
         foreach ($wallets as $val) {
             $walletObj[$val->currency] = $val;
         }
 
-        if($request->amount && !is_numeric($request->amount)){
+        if(!floatval($request->amount) > 0){
             return back()->with("fail", "Amount must be a number!");
         }
 
@@ -219,9 +220,10 @@ class UserController extends Controller
            $filePath = $file->storeAs($fileDestination, $fileName);
            
            $fileLink = "/storage/images/proofPayments/" . $fileName;
-           $transaction->state = $fileLink;
         }else{
-            return back()->with('fail', "Proof of payment is required");
+            if(session('transactionInfo')["type"] == "Deposit"){
+                return back()->with('fail', "Proof of payment is required");
+            }
         }
 
         if(!session('transactionInfo')){
@@ -238,15 +240,18 @@ class UserController extends Controller
             if(!$request->senderAddress){
                 return back()->with("fail", "Receiver Address cannot be empty!");
             }else{
-                $senderUserWallet = Wallets::where('userAddress', '=', $request->senderAddress)->first();
-                        
+                $senderUserWallet = Wallets::where('userAddress', '=', $request->senderAddress)->where('currency', '=', session('transactionInfo')["currency"])->first();
+
                 if(!$senderUserWallet){
                     return back()->with("fail", "Receiver Address was not found!");
+                }elseif($senderUserWallet->userId == session('AuthenticatedUser')){
+                    return back()->with("fail", "Cannot transfer fund to your address");
                 }
             }
         }
 
         $transaction->userId = session('AuthenticatedUser');
+        $transaction->state = $fileLink;
         $transaction->currency = session('transactionInfo')["currency"];
         $transaction->amount = $request->amount;
         $transaction->status = 'PENDING';
@@ -260,7 +265,7 @@ class UserController extends Controller
                 session()->pull('transactionInfo');
             }
 
-            return back()->with("success", session('transactionInfo')["type"] . " Successful, transaction in progress!");
+            return back()->with("success", strtolower($transaction->type) . " was successful, transaction in progress!");
         }
 
         return back()->with("fail", "Something went wrong, try again later");

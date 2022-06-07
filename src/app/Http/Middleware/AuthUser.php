@@ -44,15 +44,15 @@ class AuthUser
                 Session::put('transactionInfo', $transactionInfo);
             }
 
-            if($userInfo->isAdmin && str_contains($request->path(), 'user')){
+            if($userInfo && $userInfo->isAdmin && str_contains($request->path(), 'user')){
                 return redirect('admin/dashboard');
             }
 
-            if(!$userInfo->isAdmin && str_contains($request->path(), 'admin')){
+            if($userInfo && !$userInfo->isAdmin && str_contains($request->path(), 'admin')){
                 return redirect('user/profile');
             }
 
-            if($request->path() == 'login' || $request->path() == 'signup'){
+            if($userInfo && ($request->path() == 'login' || $request->path() == 'signup')){
                 return back();
             }
             

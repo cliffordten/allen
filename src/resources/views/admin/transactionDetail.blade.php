@@ -183,8 +183,8 @@
                     <div class="card-body">
 
                         <div class="row mb-2 justify-content-between">
-                            <div class="col-2" >
-                                <h5 class="card-title  mb-2 w-2">Proof of Payment</h5>
+                            <div class="col-6" >
+                                <h5 class="card-title  mb-2 w-2">{{$transactionDetail['transaction']['type'] == 'DEPOSIT'? 'Proof of Payment': 'Perform Action'}}</h5>
 
                                 <div class="row">
                                     <div class="col">
@@ -225,13 +225,15 @@
                             @endif
                         </div>
 
-                        <div class="wallet-history mb-4">
-                            <div class="row">
-                                <div class="col">
-                                    <img style="height:200px" class="rounded w-75" src="{{ $transactionDetail['transaction']['state'] ? asset($transactionDetail['transaction']['state']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
-                                </div>
-                            </div>
-                        </div>
+                        @if($transactionDetail['transaction']['type'] == 'DEPOSIT')
+                          <div class="wallet-history mb-4">
+                              <div class="row">
+                                  <div class="col">
+                                      <img style="height:200px" class="rounded w-75" src="{{ $transactionDetail['transaction']['state'] ? asset($transactionDetail['transaction']['state']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+                                  </div>
+                              </div>
+                          </div>
+                        @endif
 
                         <h5 class="card-title">User Transaction Information</h5>
 

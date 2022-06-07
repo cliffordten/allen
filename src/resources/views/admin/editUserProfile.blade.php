@@ -233,20 +233,20 @@
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectLanguage">Language</label>
                           <select id="selectLanguage" name="language" class="custom-select" placeholder="Select Language">
+                              <option {{$userData['language'] == "English"? "selected": ""}}>English</option>
                             <option {{$userData['language'] == "Mandarin Chinese"? "selected": ""}}>Mandarin Chinese</option>
                             <option  {{$userData['language'] == "Spanish"? "selected": ""}}>Spanish</option>
                             <option  {{$userData['language'] == "Arabic"? "selected": ""}}>Arabic</option>
                             <option  {{$userData['language'] == "Russian"? "selected": ""}}>Russian</option>
-                            <option {{$userData['language'] == "English"? "selected": ""}}>English</option>
                           </select>
                         </div>
                         <div class="col-md-6">
                           <label class="text-secondary" for="selectCurrency">Currency</label>
                           <select id="selectCurrency" name="currency" class="custom-select" placeholder="Select Currency">
+                              <option {{$userData['currency'] == 'USD'? "selected": ""}}>USD</option>
                             <option {{$userData['currency'] == 'EUR'? "selected": ""}}>EUR</option>
                             <option {{$userData['currency'] == 'GBP'? "selected": ""}}>GBP</option>
                             <option {{$userData['currency'] == 'CHF'? "selected": ""}}>CHF</option>
-                            <option {{$userData['currency'] == 'USD'? "selected": ""}}>USD</option>
                           </select>
                         </div>
                         <div class="col-md-12">

@@ -29,14 +29,22 @@ class AdminController extends Controller
     }
 
     function adminTransactionHistory(){
+        $transactionInfo = Transactions::orderBy('id', 'DESC')->get();
+
+        foreach ($transactionInfo as $trans) {
+            $senderWallet = Wallets::where('userAddress', '=', $trans->senderAddress)->first();
+            $sender = $senderWallet? User::where('id', '=', $senderWallet->userId)->first(): null;
+            $trans['senderName'] = $sender ? $sender->fullName: null;
+        }
+
         $sessionData = [
             'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(),
-            'userTransactionList'=>Transactions::orderBy('id', 'DESC')->get()
+            'userTransactionList'=>$transactionInfo
         ];
         return view('admin.transactions', $sessionData);
     }
 
-    function editTransaction($userId){
+    function editUser($userId){
         $sessionData = ['userData'=>User::where('id', '=', $userId)->first()];
         return view('admin.editUserProfile', $sessionData);
     }
@@ -110,7 +118,7 @@ class AdminController extends Controller
 
     function processUserTransaction($transId, Request $request){
         $userTransInfo = Transactions::where('id', '=', $transId)->first();
-        $userWalletInfo = Wallets::where('userId', '=', $userTransInfo->userId)->first();
+        $userWalletInfo = Wallets::where('userId', '=', $userTransInfo->userId)->where('currency', '=', $userTransInfo->currency)->first();
 
         switch ($request->actionType) {
             case 'approve':
@@ -139,10 +147,10 @@ class AdminController extends Controller
                 }
                 $userWalletInfo->save();
 
-                $userTransInfo->status = "APPROVED";
+                $userTransInfo->status = "COMPLETED";
                 $userTransInfo->save();
 
-                return back()->with("success", "Successfull user transaction approved");
+                return back()->with("success", "Successfull user transaction completed");
 
             case 'reject':
 

@@ -177,7 +177,7 @@
         <div class="col-md-12 col-lg-9">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-              @if(isset($transactionHistory))
+              @if(isset($transactionHistory[0]))
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Latest Transactions</h5>
@@ -212,7 +212,7 @@
                   </div>
                 </div>
               @endif
-              @if(!isset($transactionHistory))
+              @if(!isset($transactionHistory[0]))
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">No Transactions Recorded</h5>
