@@ -63,7 +63,7 @@
             </a>
           </li>
           <li class="nav-item header-custom-icon">
-            <a class="nav-link" href="#" id="clickFullscreen">
+                      </li><a class="nav-link" href="#" id="oncli"copy('{{$ALGO}}')"ullscreen">
               <i class="icon ion-md-expand"></i>
             </a>
           </li>
@@ -244,7 +244,7 @@
                           <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'BCH' ? 'active': ''}}"
                             >
                             <div class="d-flex">
-                              <img src="/assets/img/icon/9.png" alt="btc">
+                              <img src="/assets/img/bch.svg" alt="btc">
                               <div>
                                 <h2>BCH</h2>
                                 <p>Bitcoin Cash</p>
@@ -261,10 +261,10 @@
                           <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'XLM' ? 'active': ''}}"
                             >
                             <div class="d-flex">
-                              <img src="/assets/img/icon/6.png" alt="btc">
+                              <img src="/assets/img/stella.svg" alt="btc">
                               <div>
                                 <h2>XLM</h2>
-                                <p>Tron</p>
+                                <p>Stellar</p>
                               </div>
                             </div>
                             <div>
@@ -278,7 +278,7 @@
                           <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'ALGO' ? 'active': ''}}"
                             >
                             <div class="d-flex">
-                              <img src="/assets/img/icon/2.png" alt="btc">
+                              <img src="/assets/img/algo.webp" alt="btc">
                               <div>
                                 <h2>ALGO</h2>
                                 <p>Algo</p>
@@ -295,7 +295,7 @@
                           <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'LTC' ? 'active': ''}}"
                             >
                             <div class="d-flex">
-                              <img src="/assets/img/icon/7.png" alt="btc">
+                              <img src="/assets/img/litcoin.webp" alt="btc">
                               <div>
                                 <h2>LTC</h2>
                                 <p>Lite Coin</p>
@@ -312,7 +312,7 @@
                           <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'DOGE' ? 'active': ''}}"
                             >
                             <div class="d-flex">
-                              <img src="/assets/img/icon/4.png" alt="btc">
+                              <img src="/assets/img/doge.webp" alt="btc">
                               <div>
                                 <h2>DOGE</h2>
                                 <p>Doge Coin</p>
@@ -429,7 +429,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$BTC}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$BTC}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -750,7 +750,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$ETH}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$ETH}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -1071,7 +1071,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$BCH}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$BCH}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -1392,7 +1392,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$XLM}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$XLM}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -1713,7 +1713,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$ALGO}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$ALGO}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -2034,7 +2034,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$LTC}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$LTC}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -2355,7 +2355,7 @@
                                   <div class="input-group">
                                     <input type="text" class="form-control" value="{{$DOGE}}">
                                     <div class="input-group-prepend">
-                                      <button class="btn btn-primary">COPY</button>
+                                      <button class="btn btn-primary" onclick="copy('{{$DOGE}}')">COPY</button>
                                     </div>
                                   </div>
                                 </div>
@@ -2588,7 +2588,12 @@
       </div>
     </div>
   </div>
-
+<script>
+  const copy = (text) => {
+    navigator.clipboard.writeText(text)
+    alert(text)
+  }
+</script>
   <script src="/assets/js/jquery-3.4.1.min.js"></script>
   <script src="/assets/js/popper.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
