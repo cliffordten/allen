@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Transactions;
+use App\Models\Wallets;
+use Illuminate\Support\Facades\Session;
 
 class AuthUser
 {
@@ -23,6 +26,23 @@ class AuthUser
 
         if(session()->has('AuthenticatedUser')){
             $userInfo = User::where('id', '=', session('AuthenticatedUser'))->first();
+
+            $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
+            $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
+
+            $walletObj = null;
+
+            foreach ($wallets as $val) {
+                $walletObj[$val->currency] = $val;
+            }
+
+            if(!session('transactionInfo')){
+                $transactionInfo = null;
+                $transactionInfo['currency'] = "BTC";
+                $transactionInfo['displayAmount'] = isset($walletObj["BTC"]) ? $walletObj["BTC"]['amount'] . " BTC" : "0.00000 BTC";
+
+                Session::put('transactionInfo', $transactionInfo);
+            }
 
             if($userInfo->isAdmin && str_contains($request->path(), 'user')){
                 return redirect('admin/dashboard');

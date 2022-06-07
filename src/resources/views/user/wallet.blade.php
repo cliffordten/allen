@@ -386,7 +386,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['BTC', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['BTC', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -420,55 +420,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["BTC"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["BTC"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} BTC</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["BTC"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -510,8 +503,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in BTC</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in BTC" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -531,7 +524,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -714,7 +707,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['ETH', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['ETH', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -748,55 +741,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["ETH"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["ETH"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} ETH</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["ETH"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -838,8 +824,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in ETH</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in ETH" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -859,7 +845,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -1042,7 +1028,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['BNB', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['BNB', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -1076,55 +1062,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["BNB"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["BNB"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} BNB</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["BNB"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -1166,8 +1145,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in BNB</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in BNB" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1187,7 +1166,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -1370,7 +1349,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['TRX', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['TRX', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -1404,55 +1383,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["TRX"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["TRX"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} TRX</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["TRX"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -1494,8 +1466,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in TRX</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in TRX" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1515,7 +1487,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -1698,7 +1670,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['EOS', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['EOS', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -1732,55 +1704,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["EOS"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["EOS"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} EOS</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["EOS"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -1822,8 +1787,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in EOS</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in EOS" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1843,7 +1808,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -2026,7 +1991,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['XMR', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['XMR', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -2060,55 +2025,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["XMR"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["XMR"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} XMR</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["XMR"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -2150,8 +2108,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in XMR</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in XMR" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -2171,7 +2129,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
@@ -2354,7 +2312,7 @@
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['KCS', 'Withdraw']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['KCS', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
@@ -2388,55 +2346,48 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Latest Transactions</h5>
-                              <div class="wallet-history">
-                                <table class="table">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Date</th>
-                                      <th>Status</th>
-                                      <th>Amount</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>25-04-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>4.5454334</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>25-05-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>0.5484468</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-06-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td>25-07-2019</td>
-                                      <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                      <td>1.45894147</td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td>25-08-2019</td>
-                                      <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                      <td>2.5454545</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          @if(isset($transactions["KCS"]))
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Latest Transactions</h5>
+                                <div class="wallet-history">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>State</th>
+                                        <th>Receiver Name</th>
+                                        <th>Transaction Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($transactions["KCS"] as $trans)
+                                        <tr>
+                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$trans['created_at']}}</td>
+                                          <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                          <td>{{$trans['amount']}} KCS</td>
+                                          <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                                          <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                                          <td>{{$trans['type']}}</td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
+                          @if(!isset($transactions["KCS"]))
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">No Transactions Recorded</h5>
+                                </div>
+                              </div>
+                          @endif
                         @endif
 
                         <!---PerformTransactions---->
@@ -2478,8 +2429,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in KCS</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in KCS" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -2499,7 +2450,7 @@
                             </div>
                           @endif
 
-                          @if((Session::get('transactionInfo')['type']) == "Withdraw")
+                          @if((Session::get('transactionInfo')['type']) == "Withdrawal")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">

@@ -10,6 +10,17 @@ body {
     background: #ffffff;
     font-weight: 400;
 }
+#dark .yellow {
+    color: #d8de26;
+}
+
+#dark .red {
+    color: #de2626;
+}
+
+#dark .green {
+    color: #26de57;
+}
 
 a,
 a:hover {

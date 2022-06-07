@@ -24,31 +24,27 @@ class UserController extends Controller
         $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
         $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
 
+        foreach ($transactions as $trans) {
+            $senderWallet = Wallets::where('userAddress', '=', $trans->senderAddress)->first();
+            $sender = $senderWallet? User::where('id', '=', $senderWallet->userId)-first(): null;
+            $transaction['senderName'] = $sender ? $sender->fullName: null;
+        }
+        
         $walletObj = null;
         $transactionObj = null;
-
+        
         foreach ($wallets as $val) {
             $walletObj[$val->currency] = $val;
-            $transactionObj[$val->currency] = $transactions -> filter(function($currentVal){
+            $transactionObj[$val->currency] = $transactions -> filter(function($currentVal) use ($val) {
                                                 return $currentVal["currency"] == $val->currency;
                                             }) -> values();
         }
 
-        if(!session('transactionInfo')){
-            $transactionInfo = null;
-            $transactionInfo['currency'] = "BTC";
-            $transactionInfo['displayAmount'] = isset($walletObj["BTC"]) ? $walletObj["BTC"]['amount'] . " BTC" : "0.00000 BTC";
-
-            Session::put('transactionInfo', $transactionInfo);
-        }
-
-        // var_dump($transactionObj);
-        // return;
 
         $sessionData = [
             'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(), 
             'wallets'=> $walletObj,
-            'transactions'=> $transactions
+            'transactions'=> $transactionObj
         ];
 
         return view('user.wallet', $sessionData);
@@ -191,9 +187,61 @@ class UserController extends Controller
     }
 
     function processTransaction(Request $request){
-        // if(session()->has('transactionInfo')){
-        //     session()->pull('transactionInfo');
-        // }
-        return $request -> input();
+        
+        $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
+        $transaction = new Transactions;
+
+        $walletObj = null;
+
+        foreach ($wallets as $val) {
+            $walletObj[$val->currency] = $val;
+        }
+
+        if($request->amount && !is_numeric($request->amount)){
+            return back()->with("fail", "Amount must be a number!");
+        }
+
+        $allowedExtensions = ["svg", 'png', 'jpg', 'jpeg'];
+        if($request->hasFile('paymentProof')){
+
+           $fileDestination = 'public/images/proofPayments';            
+           $file = $request->file('paymentProof');            
+           $fileName = $file->getClientOriginalName();    
+           $fileExtension = $file->getClientOriginalExtension();
+           
+           if(!in_array($fileExtension, $allowedExtensions)){
+                return back()->with("fail", "Invalid image, Image extension '" . $fileExtension . "' is not allowed");
+           }
+
+           $filePath = $file->storeAs($fileDestination, $fileName);
+           
+           $fileLink = "/storage/images/proofPayments/" . $fileName;
+           $transaction->state = $fileLink;
+        }
+        
+        if(session('transactionInfo')["type"] == "Withdrawal" || session('transactionInfo')["type"] == "Transfer"){
+            if(floatval($walletObj[session('transactionInfo')["currency"]]['amount']) <  floatval($request->amount)){
+                return back()->with("fail", "Insufficient funds to make a " . strtolower(session('transactionInfo')["type"]));
+            }
+        }
+
+        $transaction->userId = session('AuthenticatedUser');
+        $transaction->currency = session('transactionInfo')["currency"];
+        $transaction->amount = $request->amount;
+        $transaction->status = 'PENDING';
+        $transaction->type = strtoupper(session('transactionInfo')["type"]);
+        $transaction->senderAddress = $request->senderAddress ? $request->senderAddress : '';
+        $sucess = $transaction->save();
+
+        if($sucess){
+
+            if(session()->has('transactionInfo')){
+                session()->pull('transactionInfo');
+            }
+
+            return back()->with("success", session('transactionInfo')["type"] . " Successful, transaction in progress!");
+        }
+
+        return back()->with("fail", "Something went wrong, try again later");
     }
 }
