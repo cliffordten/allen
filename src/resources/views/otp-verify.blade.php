@@ -42,7 +42,7 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/profile">Profile</a>
               <a class="dropdown-item" href="/wallet">Wallet</a>
-              <a class="dropdown-item" href="/settings">Settings</a>
+              <a class="dropdown-item" href="/transactionHistory">Settings</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -165,9 +165,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/settings" class="nav-link">
+                    <a href="/transactionHistory" class="nav-link">
                       <i class="icon ion-md-settings"></i>
-                      <span>Settings</span>
+                      <span>Transactions</span>
                     </a>
                   </li>
                   <li class="nav-item">

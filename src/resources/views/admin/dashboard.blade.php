@@ -139,9 +139,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/settings" class="nav-link">
+                    <a href="/transactionHistory" class="nav-link">
                       <i class="icon ion-md-settings"></i>
-                      <span>Settings</span>
+                      <span>Transactions</span>
                     </a>
                   </li>
                   <li class="nav-item">

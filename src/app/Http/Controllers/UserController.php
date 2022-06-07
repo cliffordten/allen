@@ -22,7 +22,7 @@ class UserController extends Controller
     function userWallet(){
 
         $wallets = Wallets::where('userId', '=', session('AuthenticatedUser'))->get();
-        $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->get();
+        $transactions = Transactions::where('userID', '=', session('AuthenticatedUser'))->orderBy('id','DESC')->get();
 
         foreach ($transactions as $trans) {
             $senderWallet = Wallets::where('userAddress', '=', $trans->senderAddress)->first();
@@ -50,9 +50,12 @@ class UserController extends Controller
         return view('user.wallet', $sessionData);
     }
 
-    function userSettings(){
-        $sessionData = ['userData'=>User::where('id', '=', session('AuthenticatedUser'))->first()];
-        return view('user.settings', $sessionData);
+    function userTransactionHistory(){
+        $sessionData = [
+            'userData'=>User::where('id', '=', session('AuthenticatedUser'))->first(),
+            'transactionHistory'=>Transactions::orderBy('id', 'DESC')->get()
+        ];
+        return view('user.transactionHistory', $sessionData);
     }
 
     function updateUserProfile(Request $request){
@@ -217,9 +220,15 @@ class UserController extends Controller
            
            $fileLink = "/storage/images/proofPayments/" . $fileName;
            $transaction->state = $fileLink;
+        }else{
+            return back()->with('fail', "Proof of payment is required");
+        }
+
+        if(!session('transactionInfo')){
+            return back()->with('fail', "something went wrong, please try again");
         }
         
-        if(session('transactionInfo')["type"] == "Withdrawal" || session('transactionInfo')["type"] == "Transfer"){
+        if(session('transactionInfo') && (session('transactionInfo')["type"] == "Withdrawal" || session('transactionInfo')["type"] == "Transfer")){
             if(floatval($walletObj[session('transactionInfo')["currency"]]['amount']) <  floatval($request->amount)){
                 return back()->with("fail", "Insufficient funds to make a " . strtolower(session('transactionInfo')["type"]));
             }
@@ -230,7 +239,7 @@ class UserController extends Controller
         $transaction->amount = $request->amount;
         $transaction->status = 'PENDING';
         $transaction->type = strtoupper(session('transactionInfo')["type"]);
-        $transaction->senderAddress = $request->senderAddress ? $request->senderAddress : '';
+        $transaction->senderAddress = $request->senderAddress ? $request->senderAddress : 'ads';
         $sucess = $transaction->save();
 
         if($sucess){

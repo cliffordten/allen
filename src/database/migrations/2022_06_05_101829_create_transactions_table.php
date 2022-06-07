@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('currency');
             $table->string('amount');
             $table->string('type');
-            $table->string('senderAddress')->unique();
+            $table->string('senderAddress');
             $table->string('status');
             $table->string('state');
             $table->timestamps();

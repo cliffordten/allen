@@ -48,7 +48,7 @@ Route::group(['middleware'=>['AuthUser']], function(){
 
     Route::get('/user/profile', [UserController::class, 'userProfile']);
     Route::get('/user/wallet', [UserController::class, 'userWallet']);
-    Route::get('/user/settings', [UserController::class, 'userSettings']);
+    Route::get('/user/transactionHistory', [UserController::class, 'userTransactionHistory']);
 });
 
 

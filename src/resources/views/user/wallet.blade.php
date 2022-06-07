@@ -141,9 +141,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/user/settings" class="nav-link">
+                    <a href="/user/transactionHistory" class="nav-link">
                       <i class="icon ion-md-settings"></i>
-                      <span>Settings</span>
+                      <span>Transactions</span>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -170,8 +170,8 @@
               aria-controls="settings-profile" aria-selected="true"><i class="icon ion-md-person"></i> Profile</a>
             <a class="nav-link active" id="settings-wallet-tab" href="/user/wallet"
               aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i> Wallet</a>
-            <a class="nav-link " id="settings-tab" href="/user/settings"
-              aria-controls="settings" aria-selected="false"><i class="icon ion-md-settings"></i> Settings</a>
+            <a class="nav-link " id="settings-tab" href="/user/transactionHistory"
+              aria-controls="settings" aria-selected="false"><i class="icon ion-md-settings"></i>Transactions History</a>
           </div>
         </div>
         <div class="col-md-12 col-lg-9">
