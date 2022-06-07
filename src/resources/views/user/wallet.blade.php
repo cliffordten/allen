@@ -333,7 +333,29 @@
                     <div class="tab-content">
                       <!-- coinBTC -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'BTC' ? 'show active': ''}}" id="coinBTC" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$BTC}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$BTC}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['BTC']))
                           <div class="card">
                             <div class="card-body">
@@ -403,42 +425,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['BTC', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['BTC', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['BTC', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$BTC}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$BTC}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["BTC"]))
                             <div class="card">
                               <div class="card-body">
@@ -654,7 +656,29 @@
 
                       <!-- coinETH -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'ETH' ? 'show active': ''}}" id="coinETH" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$ETH}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$ETH}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['ETH']))
                           <div class="card">
                             <div class="card-body">
@@ -724,42 +748,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['ETH', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['ETH', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['ETH', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$ETH}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$ETH}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["ETH"]))
                             <div class="card">
                               <div class="card-body">
@@ -975,7 +979,29 @@
 
                       <!-- coinBCH -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'BCH' ? 'show active': ''}}" id="coinBCH" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$BCH}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$BCH}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['BCH']))
                           <div class="card">
                             <div class="card-body">
@@ -1045,42 +1071,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['BCH', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['BCH', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['BCH', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$BCH}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$BCH}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["BCH"]))
                             <div class="card">
                               <div class="card-body">
@@ -1296,7 +1302,29 @@
 
                       <!-- coinXLM -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'XLM' ? 'show active': ''}}" id="coinXLM" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$XLM}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$XLM}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['XLM']))
                           <div class="card">
                             <div class="card-body">
@@ -1366,42 +1394,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['XLM', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['XLM', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['XLM', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$XLM}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$XLM}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["XLM"]))
                             <div class="card">
                               <div class="card-body">
@@ -1617,7 +1625,29 @@
 
                       <!-- coinALGO -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'ALGO' ? 'show active': ''}}" id="coinALGO" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$ALGO}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$ALGO}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['ALGO']))
                           <div class="card">
                             <div class="card-body">
@@ -1687,42 +1717,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$ALGO}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$ALGO}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["ALGO"]))
                             <div class="card">
                               <div class="card-body">
@@ -1938,7 +1948,29 @@
 
                       <!-- coinLTC -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'LTC' ? 'show active': ''}}" id="coinLTC" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$LTC}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$LTC}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['LTC']))
                           <div class="card">
                             <div class="card-body">
@@ -2008,42 +2040,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['LTC', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['LTC', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['LTC', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$LTC}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$LTC}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["LTC"]))
                             <div class="card">
                               <div class="card-body">
@@ -2259,7 +2271,29 @@
 
                       <!-- coinDOGE -->
                       <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'DOGE' ? 'show active': ''}}" id="coinDOGE" role="tabpanel">
-                        
+                        <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Wallet Deposit Address</h5>
+                              <div class="row wallet-address">
+                                <div class="col-md-8">
+                                  <p>Kindly copy the wallet below and do a deposit. 
+Once you deposit click the *Send proof of deposit* below and share evidence with admin 
+Your funds will reflect in your account in few minutes.
+In case of any difficulty contact admin@btcinvestmentportal.com</p>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" value="{{$DOGE}}">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onclick="copy('{{$DOGE}}')">COPY</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         @if(!isset(Session::get('transactionInfo')['DOGE']))
                           <div class="card">
                             <div class="card-body">
@@ -2329,42 +2363,22 @@
                                 <div class="row">
                                   <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Deposit']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn green">Deposit</button>
+                                      <button type="submit" class="btn green">Send proof of deposit</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Withdrawal']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn red">Withdraw</button>
+                                      <button type="submit" class="btn red">Withdraw funds</button>
                                   </form>
                                   <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Transfer']) }}" method="get">
                                       @csrf
-                                      <button type="submit" class="btn btn-primary">Transfer</button>
+                                      <button type="submit" class="btn btn-primary">Transfer funds</button>
                                   </form>
                                 </div>
                               @endif
 
                             </div>
                           </div>
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Wallet Deposit Address</h5>
-                              <div class="row wallet-address">
-                                <div class="col-md-8">
-                                  <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                    of your
-                                    funds at once if you deposit more than your daily withdrawal limit.</p>
-                                  <div class="input-group">
-                                    <input type="text" class="form-control" value="{{$DOGE}}">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onclick="copy('{{$DOGE}}')">COPY</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <img src="/assets/img/qr-code-light.svg" alt="qr-code">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                           @if(isset($transactions["DOGE"]))
                             <div class="card">
                               <div class="card-body">
