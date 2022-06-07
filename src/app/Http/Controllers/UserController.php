@@ -208,7 +208,7 @@ class UserController extends Controller
         $allowedExtensions = ["svg", 'png', 'jpg', 'jpeg'];
         if($request->hasFile('paymentProof')){
 
-           $fileDestination = 'public/images/proofPayments';            
+           $fileDestination = 'public/images/profiles';            
            $file = $request->file('paymentProof');            
            $fileName = $file->getClientOriginalName();    
            $fileExtension = $file->getClientOriginalExtension();
@@ -219,7 +219,7 @@ class UserController extends Controller
 
            $filePath = $file->storeAs($fileDestination, $fileName);
            
-           $fileLink = "/storage/images/proofPayments/" . $fileName;
+           $fileLink = "/storage/images/profiles/" . $fileName;
         }else{
             if(session('transactionInfo')["type"] == "Deposit"){
                 return back()->with('fail', "Proof of payment is required");

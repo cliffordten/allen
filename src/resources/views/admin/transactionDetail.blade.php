@@ -232,9 +232,9 @@
                         </div>
 
                         @if($transactionDetail['transaction']['type'] == 'DEPOSIT')
-                          <div class="wallet-history mb-4">
+                          <div class="wallet-history mb-4 " style="text-align-last:center">
                               <div class="row">
-                                  <div class="col">
+                                  <div class="col my-3">
                                       <img style="height:200px" class="rounded w-75" src="{{ $transactionDetail['transaction']['state'] ? asset($transactionDetail['transaction']['state']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
                                   </div>
                               </div>

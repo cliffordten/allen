@@ -11,6 +11,25 @@
 </head>
 
 <body id="dark">
+ <?php
+
+ $BTC="bc1qysp3qyer4tj4ngu4krl07myh5e30cv2x23fs46";
+ $ETH="0x90763d1B45cbA0C3B6B11Df533f7cD7978EBa611";
+ $BCH="qz3427jhc42audj8eg88wkapnh3kauzm7uesmrh8we";
+ $XLM="GAFOT3EAEYLCCURODQR3EKGKZC4QRGOOPYY4IVJBVBWEIJ7H2DWQXEFB";
+ $ALGO="2X24S4PWE6X723LE7PRMZQS6RD7IQTTMVRGEJTZ77FV7ZEQUCH6FLYK3DY";
+ $LTC="MQ1wWJHsmtwWkVWzRyP7HtXE4ehiR4D67v";
+ $DOGE="DMWDPpsaytJ34J1jxUbbpR7b3V6A8vkdUZ";
+
+  $BTC_VAL= "29,915.50";
+ $ETH_VAL= "1785.55";
+ $BCH_VAL= "176.94";
+ $XLM_VAL= "0.14";
+ $ALGO_VAL= "0.39";
+ $LTC_VAL= "62.47";
+ $DOGE_VAL= "0.080";
+
+?>
 <header class="dark-bb">
     <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="/"><img src="/assets/img/logo-light.svg" alt="logo"></a>
@@ -198,7 +217,7 @@
                               </div>
                             </div>
                             <div>
-                              <h3>4.5484254</h3>
+                              <h3>{{$BTC_VAL}}</h3>
                               <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["BTC"]) ? $wallets["BTC"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
@@ -215,93 +234,93 @@
                               </div>
                             </div>
                             <div>
-                              <h3>13.454845</h3>
+                              <h3>{{$ETH_VAL}}</h3>
                               <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["ETH"]) ? $wallets["ETH"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
 
-                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="BNB">
-                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'BNB' ? 'active': ''}}"
+                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="BCH">
+                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'BCH' ? 'active': ''}}"
                             >
                             <div class="d-flex">
                               <img src="/assets/img/icon/9.png" alt="btc">
                               <div>
-                                <h2>BNB</h2>
-                                <p>Binance</p>
+                                <h2>BCH</h2>
+                                <p>Bitcoin Cash</p>
                               </div>
                             </div>
                             <div>
-                              <h3>35.4842458</h3>
-                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["BNB"]) ? $wallets["BNB"]["amount"] : "0.0000000"}}</p>
+                              <h3>{{$BCH_VAL}}</h3>
+                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["BCH"]) ? $wallets["BCH"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
 
-                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="TRX">
-                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'TRX' ? 'active': ''}}"
+                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="XLM">
+                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'XLM' ? 'active': ''}}"
                             >
                             <div class="d-flex">
                               <img src="/assets/img/icon/6.png" alt="btc">
                               <div>
-                                <h2>TRX</h2>
+                                <h2>XLM</h2>
                                 <p>Tron</p>
                               </div>
                             </div>
                             <div>
-                              <h3>4.458941</h3>
-                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["TRX"]) ? $wallets["TRX"]["amount"] : "0.0000000"}}</p>
+                              <h3>{{$XLM_VAL}}</h3>
+                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["XLM"]) ? $wallets["XLM"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
 
-                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="EOS">
-                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'EOS' ? 'active': ''}}"
+                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="ALGO">
+                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'ALGO' ? 'active': ''}}"
                             >
                             <div class="d-flex">
                               <img src="/assets/img/icon/2.png" alt="btc">
                               <div>
-                                <h2>EOS</h2>
-                                <p>Eosio</p>
+                                <h2>ALGO</h2>
+                                <p>Algo</p>
                               </div>
                             </div>
                             <div>
-                              <h3>33.478951</h3>
-                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["EOS"]) ? $wallets["EOS"]["amount"] : "0.0000000"}}</p>
+                              <h3>{{$ALGO_VAL}}</h3>
+                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["ALGO"]) ? $wallets["ALGO"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
 
-                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="XMR">
-                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'XMR' ? 'active': ''}}"
+                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="LTC">
+                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'LTC' ? 'active': ''}}"
                             >
                             <div class="d-flex">
                               <img src="/assets/img/icon/7.png" alt="btc">
                               <div>
-                                <h2>XMR</h2>
-                                <p>Monero</p>
+                                <h2>LTC</h2>
+                                <p>Lite Coin</p>
                               </div>
                             </div>
                             <div>
-                              <h3>99.465975</h3>
-                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["XMR"]) ? $wallets["XMR"]["amount"] : "0.0000000"}}</p>
+                              <h3>{{$LTC_VAL}}</h3>
+                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["LTC"]) ? $wallets["LTC"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
 
-                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="KCS">
-                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'KCS' ? 'active': ''}}"
+                        <button name="currency" type="submit" class="m-0 p-0 bg-transparent w-100 border-0" value="DOGE">
+                          <a class="nav-link d-flex justify-content-between align-items-center {{(Session::get('transactionInfo')['currency']) == 'DOGE' ? 'active': ''}}"
                             >
                             <div class="d-flex">
                               <img src="/assets/img/icon/4.png" alt="btc">
                               <div>
-                                <h2>KCS</h2>
-                                <p>Kstarcoin</p>
+                                <h2>DOGE</h2>
+                                <p>Doge Coin</p>
                               </div>
                             </div>
                             <div>
-                              <h3>114.57564</h3>
-                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["KCS"]) ? $wallets["KCS"]["amount"] : "0.0000000"}}</p>
+                              <h3>{{$DOGE_VAL}}</h3>
+                              <p class="text-right"><i class="icon ion-md-lock"></i> {{ isset($wallets["DOGE"]) ? $wallets["DOGE"]["amount"] : "0.0000000"}}</p>
                             </div>
                           </a>
                         </button>
@@ -408,7 +427,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$BTC}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -729,7 +748,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$ETH}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -954,10 +973,10 @@
                         @endif
                       </div>
 
-                      <!-- coinBNB -->
-                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'BNB' ? 'show active': ''}}" id="coinBNB" role="tabpanel">
+                      <!-- coinBCH -->
+                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'BCH' ? 'show active': ''}}" id="coinBCH" role="tabpanel">
                         
-                        @if(!isset(Session::get('transactionInfo')['BNB']))
+                        @if(!isset(Session::get('transactionInfo')['BCH']))
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Balances</h5>
@@ -991,15 +1010,15 @@
                                     <i class="icon ion-md-cash"></i>
                                     <h2>Total Equity</h2>
                                   </div>
-                                  @if(isset($wallets["BNB"]))
+                                  @if(isset($wallets["BCH"]))
                                     <div>
-                                      <h3>{{$wallets["BNB"]["amount"]}} BNB</h3>
+                                      <h3>{{$wallets["BCH"]["amount"]}} BCH</h3>
                                     </div>
                                   @endif
 
-                                  @if(!isset($wallets["BNB"]))
+                                  @if(!isset($wallets["BCH"]))
                                     <div>
-                                      <h3 class="text-secondary">No BNB wallet found</h3>
+                                      <h3 class="text-secondary">No BCH wallet found</h3>
                                     </div>
                                   @endif
                                 </li>
@@ -1008,31 +1027,31 @@
                                     <i class="icon ion-md-checkmark"></i>
                                     <h2>Your Address</h2>
                                   </div>
-                                  @if(!isset($wallets["BNB"]))
-                                    <form action="{{ route('createUserWallet', 'BNB') }}" method="post">
+                                  @if(!isset($wallets["BCH"]))
+                                    <form action="{{ route('createUserWallet', 'BCH') }}" method="post">
                                       @csrf
-                                      <input class="btn btn-secondary" type="submit" value="Create BNB Wallet">
+                                      <input class="btn btn-secondary" type="submit" value="Create BCH Wallet">
                                     </form>
                                   @endif
-                                  @if(isset($wallets["BNB"]))
+                                  @if(isset($wallets["BCH"]))
                                     <div>
-                                      <h3>{{$wallets['BNB']['userAddress']}} BNB</h3>
+                                      <h3>{{$wallets['BCH']['userAddress']}} BCH</h3>
                                     </div>
                                   @endif
                                 </li>
                               </ul>
                               
-                              @if(isset($wallets["BNB"]))
+                              @if(isset($wallets["BCH"]))
                                 <div class="row">
-                                  <form class="col" action="{{ route('makeTransaction', ['BNB', 'Deposit']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['BCH', 'Deposit']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['BNB', 'Withdrawal']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['BCH', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['BNB', 'Transfer']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['BCH', 'Transfer']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                   </form>
@@ -1050,7 +1069,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$BCH}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -1062,7 +1081,7 @@
                               </div>
                             </div>
                           </div>
-                          @if(isset($transactions["BNB"]))
+                          @if(isset($transactions["BCH"]))
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Latest Transactions</h5>
@@ -1080,12 +1099,12 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["BNB"] as $key=>$trans)
+                                      @foreach($transactions["BCH"] as $key=>$trans)
                                         <tr>
                                           <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
-                                          <td>{{$trans['amount']}} BNB</td>
+                                          <td>{{$trans['amount']}} BCH</td>
                                           <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                                           <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                                           <td>{{$trans['type']}}</td>
@@ -1097,7 +1116,7 @@
                               </div>
                             </div>
                           @endif
-                          @if(!isset($transactions["BNB"]))
+                          @if(!isset($transactions["BCH"]))
                             <div class="card">
                                 <div class="card-body">
                                   <h5 class="card-title">No Transactions Recorded</h5>
@@ -1107,13 +1126,13 @@
                         @endif
 
                         <!---PerformTransactions---->
-                        @if(isset(Session::get('transactionInfo')['BNB']))
+                        @if(isset(Session::get('transactionInfo')['BCH']))
 
                           @if((Session::get('transactionInfo')['type']) == "Deposit")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Deposit BNB or Topup your BNB account</h5>
+                                  <h5 class="card-title">Deposit BCH or Topup your BCH account</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post" enctype="multipart/form-data">
 
@@ -1145,8 +1164,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid in BNB</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in BNB" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in BCH</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in BCH" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1170,7 +1189,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Request BNB withdrawal</h5>
+                                  <h5 class="card-title">Request BCH withdrawal</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1220,7 +1239,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Transfer BNB to another wallet</h5>
+                                  <h5 class="card-title">Transfer BCH to another wallet</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1258,8 +1277,8 @@
                                       </div>
                                       <div class="form-row mt-4 mb-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Receiver's BNB address</label>
-                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="BNB address" required>
+                                          <label class="text-secondary" for="formFirst">Receiver's BCH address</label>
+                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="BCH address" required>
                                         </div>
                                       </div>
                                       
@@ -1275,10 +1294,10 @@
                         @endif
                       </div>
 
-                      <!-- coinTRX -->
-                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'TRX' ? 'show active': ''}}" id="coinTRX" role="tabpanel">
+                      <!-- coinXLM -->
+                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'XLM' ? 'show active': ''}}" id="coinXLM" role="tabpanel">
                         
-                        @if(!isset(Session::get('transactionInfo')['TRX']))
+                        @if(!isset(Session::get('transactionInfo')['XLM']))
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Balances</h5>
@@ -1312,15 +1331,15 @@
                                     <i class="icon ion-md-cash"></i>
                                     <h2>Total Equity</h2>
                                   </div>
-                                  @if(isset($wallets["TRX"]))
+                                  @if(isset($wallets["XLM"]))
                                     <div>
-                                      <h3>4{{$wallets["TRX"]["amount"]}} TRX</h3>
+                                      <h3>4{{$wallets["XLM"]["amount"]}} XLM</h3>
                                     </div>
                                   @endif
 
-                                  @if(!isset($wallets["TRX"]))
+                                  @if(!isset($wallets["XLM"]))
                                     <div>
-                                      <h3 class="text-secondary">No TRX wallet found</h3>
+                                      <h3 class="text-secondary">No XLM wallet found</h3>
                                     </div>
                                   @endif
                                 </li>
@@ -1329,31 +1348,31 @@
                                     <i class="icon ion-md-checkmark"></i>
                                     <h2>Your Address</h2>
                                   </div>
-                                  @if(!isset($wallets["TRX"]))
-                                    <form action="{{ route('createUserWallet', 'TRX') }}" method="post">
+                                  @if(!isset($wallets["XLM"]))
+                                    <form action="{{ route('createUserWallet', 'XLM') }}" method="post">
                                       @csrf
-                                      <input class="btn btn-secondary" type="submit" value="Create TRX Wallet">
+                                      <input class="btn btn-secondary" type="submit" value="Create XLM Wallet">
                                     </form>
                                   @endif
-                                  @if(isset($wallets["TRX"]))
+                                  @if(isset($wallets["XLM"]))
                                     <div>
-                                      <h3>{{$wallets['TRX']['userAddress']}} TRX</h3>
+                                      <h3>{{$wallets['XLM']['userAddress']}} XLM</h3>
                                     </div>
                                   @endif
                                 </li>
                               </ul>
                               
-                              @if(isset($wallets["TRX"]))
+                              @if(isset($wallets["XLM"]))
                                 <div class="row">
-                                  <form class="col" action="{{ route('makeTransaction', ['TRX', 'Deposit']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['XLM', 'Deposit']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['TRX', 'Withdrawal']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['XLM', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['TRX', 'Transfer']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['XLM', 'Transfer']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                   </form>
@@ -1371,7 +1390,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$XLM}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -1383,7 +1402,7 @@
                               </div>
                             </div>
                           </div>
-                          @if(isset($transactions["TRX"]))
+                          @if(isset($transactions["XLM"]))
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Latest Transactions</h5>
@@ -1401,12 +1420,12 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["TRX"] as $key=>$trans)
+                                      @foreach($transactions["XLM"] as $key=>$trans)
                                         <tr>
                                           <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
-                                          <td>{{$trans['amount']}} TRX</td>
+                                          <td>{{$trans['amount']}} XLM</td>
                                           <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                                           <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                                           <td>{{$trans['type']}}</td>
@@ -1418,7 +1437,7 @@
                               </div>
                             </div>
                           @endif
-                          @if(!isset($transactions["TRX"]))
+                          @if(!isset($transactions["XLM"]))
                             <div class="card">
                                 <div class="card-body">
                                   <h5 class="card-title">No Transactions Recorded</h5>
@@ -1428,13 +1447,13 @@
                         @endif
 
                         <!---PerformTransactions---->
-                        @if(isset(Session::get('transactionInfo')['TRX']))
+                        @if(isset(Session::get('transactionInfo')['XLM']))
 
                           @if((Session::get('transactionInfo')['type']) == "Deposit")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Deposit TRX or Topup your TRX account</h5>
+                                  <h5 class="card-title">Deposit XLM or Topup your XLM account</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post" enctype="multipart/form-data">
 
@@ -1466,8 +1485,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid in TRX</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in TRX" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in XLM</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in XLM" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1491,7 +1510,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Request TRX withdrawal</h5>
+                                  <h5 class="card-title">Request XLM withdrawal</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1541,7 +1560,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Transfer TRX to another wallet</h5>
+                                  <h5 class="card-title">Transfer XLM to another wallet</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1579,8 +1598,8 @@
                                       </div>
                                       <div class="form-row mt-4 mb-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Receiver's TRX address</label>
-                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="TRX address" required>
+                                          <label class="text-secondary" for="formFirst">Receiver's XLM address</label>
+                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="XLM address" required>
                                         </div>
                                       </div>
                                       
@@ -1596,10 +1615,10 @@
                         @endif
                       </div>
 
-                      <!-- coinEOS -->
-                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'EOS' ? 'show active': ''}}" id="coinEOS" role="tabpanel">
+                      <!-- coinALGO -->
+                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'ALGO' ? 'show active': ''}}" id="coinALGO" role="tabpanel">
                         
-                        @if(!isset(Session::get('transactionInfo')['EOS']))
+                        @if(!isset(Session::get('transactionInfo')['ALGO']))
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Balances</h5>
@@ -1633,15 +1652,15 @@
                                     <i class="icon ion-md-cash"></i>
                                     <h2>Total Equity</h2>
                                   </div>
-                                  @if(isset($wallets["EOS"]))
+                                  @if(isset($wallets["ALGO"]))
                                     <div>
-                                      <h3>{{$wallets["EOS"]["amount"]}} EOS</h3>
+                                      <h3>{{$wallets["ALGO"]["amount"]}} ALGO</h3>
                                     </div>
                                   @endif
 
-                                  @if(!isset($wallets["EOS"]))
+                                  @if(!isset($wallets["ALGO"]))
                                     <div>
-                                      <h3 class="text-secondary">No EOS wallet found</h3>
+                                      <h3 class="text-secondary">No ALGO wallet found</h3>
                                     </div>
                                   @endif
                                 </li>
@@ -1650,31 +1669,31 @@
                                     <i class="icon ion-md-checkmark"></i>
                                     <h2>Your Address</h2>
                                   </div>
-                                  @if(!isset($wallets["EOS"]))
-                                    <form action="{{ route('createUserWallet', 'EOS') }}" method="post">
+                                  @if(!isset($wallets["ALGO"]))
+                                    <form action="{{ route('createUserWallet', 'ALGO') }}" method="post">
                                       @csrf
-                                      <input class="btn btn-secondary" type="submit" value="Create EOS Wallet">
+                                      <input class="btn btn-secondary" type="submit" value="Create ALGO Wallet">
                                     </form>
                                   @endif
-                                  @if(isset($wallets["EOS"]))
+                                  @if(isset($wallets["ALGO"]))
                                     <div>
-                                      <h3>{{$wallets['EOS']['userAddress']}} EOS</h3>
+                                      <h3>{{$wallets['ALGO']['userAddress']}} ALGO</h3>
                                     </div>
                                   @endif
                                 </li>
                               </ul>
                               
-                              @if(isset($wallets["EOS"]))
+                              @if(isset($wallets["ALGO"]))
                                 <div class="row">
-                                  <form class="col" action="{{ route('makeTransaction', ['EOS', 'Deposit']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Deposit']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['EOS', 'Withdrawal']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['EOS', 'Transfer']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['ALGO', 'Transfer']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                   </form>
@@ -1692,7 +1711,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$ALGO}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -1704,7 +1723,7 @@
                               </div>
                             </div>
                           </div>
-                          @if(isset($transactions["EOS"]))
+                          @if(isset($transactions["ALGO"]))
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Latest Transactions</h5>
@@ -1722,12 +1741,12 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["EOS"] as $key=>$trans)
+                                      @foreach($transactions["ALGO"] as $key=>$trans)
                                         <tr>
                                           <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
-                                          <td>{{$trans['amount']}} EOS</td>
+                                          <td>{{$trans['amount']}} ALGO</td>
                                           <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                                           <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                                           <td>{{$trans['type']}}</td>
@@ -1739,7 +1758,7 @@
                               </div>
                             </div>
                           @endif
-                          @if(!isset($transactions["EOS"]))
+                          @if(!isset($transactions["ALGO"]))
                             <div class="card">
                                 <div class="card-body">
                                   <h5 class="card-title">No Transactions Recorded</h5>
@@ -1749,13 +1768,13 @@
                         @endif
 
                         <!---PerformTransactions---->
-                        @if(isset(Session::get('transactionInfo')['EOS']))
+                        @if(isset(Session::get('transactionInfo')['ALGO']))
 
                           @if((Session::get('transactionInfo')['type']) == "Deposit")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Deposit EOS or Topup your EOS account</h5>
+                                  <h5 class="card-title">Deposit ALGO or Topup your ALGO account</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post" enctype="multipart/form-data">
 
@@ -1787,8 +1806,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid in EOS</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in EOS" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in ALGO</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in ALGO" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -1812,7 +1831,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Request EOS withdrawal</h5>
+                                  <h5 class="card-title">Request ALGO withdrawal</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1862,7 +1881,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Transfer EOS to another wallet</h5>
+                                  <h5 class="card-title">Transfer ALGO to another wallet</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -1900,8 +1919,8 @@
                                       </div>
                                       <div class="form-row mt-4 mb-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Receiver's EOS address</label>
-                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="EOS address" required>
+                                          <label class="text-secondary" for="formFirst">Receiver's ALGO address</label>
+                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="ALGO address" required>
                                         </div>
                                       </div>
                                       
@@ -1917,10 +1936,10 @@
                         @endif
                       </div>
 
-                      <!-- coinXMR -->
-                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'XMR' ? 'show active': ''}}" id="coinXMR" role="tabpanel">
+                      <!-- coinLTC -->
+                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'LTC' ? 'show active': ''}}" id="coinLTC" role="tabpanel">
                         
-                        @if(!isset(Session::get('transactionInfo')['XMR']))
+                        @if(!isset(Session::get('transactionInfo')['LTC']))
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Balances</h5>
@@ -1954,15 +1973,15 @@
                                     <i class="icon ion-md-cash"></i>
                                     <h2>Total Equity</h2>
                                   </div>
-                                  @if(isset($wallets["XMR"]))
+                                  @if(isset($wallets["LTC"]))
                                     <div>
-                                      <h3>{{$wallets["XMR"]["amount"]}} XMR</h3>
+                                      <h3>{{$wallets["LTC"]["amount"]}} LTC</h3>
                                     </div>
                                   @endif
 
-                                  @if(!isset($wallets["XMR"]))
+                                  @if(!isset($wallets["LTC"]))
                                     <div>
-                                      <h3 class="text-secondary">No XMR wallet found</h3>
+                                      <h3 class="text-secondary">No LTC wallet found</h3>
                                     </div>
                                   @endif
                                 </li>
@@ -1971,31 +1990,31 @@
                                     <i class="icon ion-md-checkmark"></i>
                                     <h2>Your Address</h2>
                                   </div>
-                                  @if(!isset($wallets["XMR"]))
-                                    <form action="{{ route('createUserWallet', 'XMR') }}" method="post">
+                                  @if(!isset($wallets["LTC"]))
+                                    <form action="{{ route('createUserWallet', 'LTC') }}" method="post">
                                       @csrf
-                                      <input class="btn btn-secondary" type="submit" value="Create XMR Wallet">
+                                      <input class="btn btn-secondary" type="submit" value="Create LTC Wallet">
                                     </form>
                                   @endif
-                                  @if(isset($wallets["XMR"]))
+                                  @if(isset($wallets["LTC"]))
                                     <div>
-                                      <h3>{{$wallets['XMR']['userAddress']}} XMR</h3>
+                                      <h3>{{$wallets['LTC']['userAddress']}} LTC</h3>
                                     </div>
                                   @endif
                                 </li>
                               </ul>
                               
-                              @if(isset($wallets["XMR"]))
+                              @if(isset($wallets["LTC"]))
                                 <div class="row">
-                                  <form class="col" action="{{ route('makeTransaction', ['XMR', 'Deposit']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['LTC', 'Deposit']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['XMR', 'Withdrawal']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['LTC', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['XMR', 'Transfer']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['LTC', 'Transfer']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                   </form>
@@ -2013,7 +2032,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$LTC}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -2025,7 +2044,7 @@
                               </div>
                             </div>
                           </div>
-                          @if(isset($transactions["XMR"]))
+                          @if(isset($transactions["LTC"]))
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Latest Transactions</h5>
@@ -2043,12 +2062,12 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["XMR"] as $key=>$trans)
+                                      @foreach($transactions["LTC"] as $key=>$trans)
                                         <tr>
                                           <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
-                                          <td>{{$trans['amount']}} XMR</td>
+                                          <td>{{$trans['amount']}} LTC</td>
                                           <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                                           <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                                           <td>{{$trans['type']}}</td>
@@ -2060,7 +2079,7 @@
                               </div>
                             </div>
                           @endif
-                          @if(!isset($transactions["XMR"]))
+                          @if(!isset($transactions["LTC"]))
                             <div class="card">
                                 <div class="card-body">
                                   <h5 class="card-title">No Transactions Recorded</h5>
@@ -2070,13 +2089,13 @@
                         @endif
 
                         <!---PerformTransactions---->
-                        @if(isset(Session::get('transactionInfo')['XMR']))
+                        @if(isset(Session::get('transactionInfo')['LTC']))
 
                           @if((Session::get('transactionInfo')['type']) == "Deposit")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Deposit XMR or Topup your XMR account</h5>
+                                  <h5 class="card-title">Deposit LTC or Topup your LTC account</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post" enctype="multipart/form-data">
 
@@ -2108,8 +2127,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid in XMR</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in XMR" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in LTC</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in LTC" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -2133,7 +2152,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Request XMR withdrawal</h5>
+                                  <h5 class="card-title">Request LTC withdrawal</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -2183,7 +2202,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Transfer XMR to another wallet</h5>
+                                  <h5 class="card-title">Transfer LTC to another wallet</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -2221,8 +2240,8 @@
                                       </div>
                                       <div class="form-row mt-4 mb-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Receiver's XMR address</label>
-                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="XMR address" required>
+                                          <label class="text-secondary" for="formFirst">Receiver's LTC address</label>
+                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="LTC address" required>
                                         </div>
                                       </div>
                                       
@@ -2238,10 +2257,10 @@
                         @endif
                       </div>
 
-                      <!-- coinKCS -->
-                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'KCS' ? 'show active': ''}}" id="coinKCS" role="tabpanel">
+                      <!-- coinDOGE -->
+                      <div class="tab-pane fade {{(Session::get('transactionInfo')['currency']) == 'DOGE' ? 'show active': ''}}" id="coinDOGE" role="tabpanel">
                         
-                        @if(!isset(Session::get('transactionInfo')['KCS']))
+                        @if(!isset(Session::get('transactionInfo')['DOGE']))
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Balances</h5>
@@ -2275,15 +2294,15 @@
                                     <i class="icon ion-md-cash"></i>
                                     <h2>Total Equity</h2>
                                   </div>
-                                  @if(isset($wallets["KCS"]))
+                                  @if(isset($wallets["DOGE"]))
                                     <div>
-                                      <h3>{{$wallets["KCS"]["amount"]}} KCS</h3>
+                                      <h3>{{$wallets["DOGE"]["amount"]}} DOGE</h3>
                                     </div>
                                   @endif
 
-                                  @if(!isset($wallets["KCS"]))
+                                  @if(!isset($wallets["DOGE"]))
                                     <div>
-                                      <h3 class="text-secondary">No KCS wallet found</h3>
+                                      <h3 class="text-secondary">No DOGE wallet found</h3>
                                     </div>
                                   @endif
                                 </li>
@@ -2292,31 +2311,31 @@
                                     <i class="icon ion-md-checkmark"></i>
                                     <h2>Your Address</h2>
                                   </div>
-                                  @if(!isset($wallets["KCS"]))
-                                    <form action="{{ route('createUserWallet', 'KCS') }}" method="post">
+                                  @if(!isset($wallets["DOGE"]))
+                                    <form action="{{ route('createUserWallet', 'DOGE') }}" method="post">
                                       @csrf
-                                      <input class="btn btn-secondary" type="submit" value="Create KCS Wallet">
+                                      <input class="btn btn-secondary" type="submit" value="Create DOGE Wallet">
                                     </form>
                                   @endif
-                                  @if(isset($wallets["KCS"]))
+                                  @if(isset($wallets["DOGE"]))
                                     <div>
-                                      <h3>{{$wallets['KCS']['userAddress']}} KCS</h3>
+                                      <h3>{{$wallets['DOGE']['userAddress']}} DOGE</h3>
                                     </div>
                                   @endif
                                 </li>
                               </ul>
                               
-                              @if(isset($wallets["KCS"]))
+                              @if(isset($wallets["DOGE"]))
                                 <div class="row">
-                                  <form class="col" action="{{ route('makeTransaction', ['KCS', 'Deposit']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Deposit']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn green">Deposit</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['KCS', 'Withdrawal']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Withdrawal']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn red">Withdraw</button>
                                   </form>
-                                  <form class="col" action="{{ route('makeTransaction', ['KCS', 'Transfer']) }}" method="get">
+                                  <form class="col" action="{{ route('makeTransaction', ['DOGE', 'Transfer']) }}" method="get">
                                       @csrf
                                       <button type="submit" class="btn btn-primary">Transfer</button>
                                   </form>
@@ -2334,7 +2353,7 @@
                                     of your
                                     funds at once if you deposit more than your daily withdrawal limit.</p>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" value="Ad87deD4gEe8dG57Ede4eEg5dREs4d5e8f4e">
+                                    <input type="text" class="form-control" value="{{$DOGE}}">
                                     <div class="input-group-prepend">
                                       <button class="btn btn-primary">COPY</button>
                                     </div>
@@ -2346,7 +2365,7 @@
                               </div>
                             </div>
                           </div>
-                          @if(isset($transactions["KCS"]))
+                          @if(isset($transactions["DOGE"]))
                             <div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">Latest Transactions</h5>
@@ -2364,12 +2383,12 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["KCS"] as $key=>$trans)
+                                      @foreach($transactions["DOGE"] as $key=>$trans)
                                         <tr>
                                           <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
-                                          <td>{{$trans['amount']}} KCS</td>
+                                          <td>{{$trans['amount']}} DOGE</td>
                                           <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                                           <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                                           <td>{{$trans['type']}}</td>
@@ -2381,7 +2400,7 @@
                               </div>
                             </div>
                           @endif
-                          @if(!isset($transactions["KCS"]))
+                          @if(!isset($transactions["DOGE"]))
                             <div class="card">
                                 <div class="card-body">
                                   <h5 class="card-title">No Transactions Recorded</h5>
@@ -2391,13 +2410,13 @@
                         @endif
 
                         <!---PerformTransactions---->
-                        @if(isset(Session::get('transactionInfo')['KCS']))
+                        @if(isset(Session::get('transactionInfo')['DOGE']))
 
                           @if((Session::get('transactionInfo')['type']) == "Deposit")
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Deposit KCS or Topup your KCS account</h5>
+                                  <h5 class="card-title">Deposit DOGE or Topup your DOGE account</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post" enctype="multipart/form-data">
 
@@ -2429,8 +2448,8 @@
 
                                       <div class="form-row mt-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Amount paid in KCS</label>
-                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in KCS" required>
+                                          <label class="text-secondary" for="formFirst">Amount paid in DOGE</label>
+                                          <input id="formFirst" name="amount" type="text" class="form-control" placeholder="Amount paid in DOGE" required>
                                         </div>
                                       </div>
                                       <label class="text-secondary mt-4" for="formFirst">Proof of Payment</label>
@@ -2454,7 +2473,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Request KCS withdrawal</h5>
+                                  <h5 class="card-title">Request DOGE withdrawal</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -2504,7 +2523,7 @@
                             <div class="card">
                               <div class="card-body bg-red w-full">
                                 <div class="m-auto p-3 w-75 ">
-                                  <h5 class="card-title">Transfer KCS to another wallet</h5>
+                                  <h5 class="card-title">Transfer DOGE to another wallet</h5>
                                   <div class="settings-profile">
                                     <form action="{{ route('processTransaction') }}" method="post">
 
@@ -2542,8 +2561,8 @@
                                       </div>
                                       <div class="form-row mt-4 mb-4">
                                         <div class="col">
-                                          <label class="text-secondary" for="formFirst">Receiver's KCS address</label>
-                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="KCS address" required>
+                                          <label class="text-secondary" for="formFirst">Receiver's DOGE address</label>
+                                          <input id="formFirst" name="senderAddress" type="text" class="form-control" placeholder="DOGE address" required>
                                         </div>
                                       </div>
                                       
