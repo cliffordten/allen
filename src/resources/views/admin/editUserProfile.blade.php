@@ -176,6 +176,103 @@
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="settings-profile" role="tabpanel"
               aria-labelledby="settings-profile-tab">
+
+              @if(isset($userWallets[0]))
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{$userData['fullName']}} Wallets</h5>
+
+                    <div class="row">
+                      <div class="col">
+
+                        @if(Session::get('success'))
+                          <div class="alert alert-success">
+                            {{Session::get('success')}}
+                          </div>
+                        @endif
+
+                        @if(Session::get('fail'))
+                          <div class="alert alert-danger">
+                            {{Session::get('fail')}}
+                          </div>
+                        @endif
+
+                        @if($errors->any())
+                          <div class="alert alert-danger">
+                            {{ explode('"', $errors)[3] }}
+                          </div>
+                        @endif
+
+                      </div>
+                    </div>
+
+                    <div class="wallet-history">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Currency</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($userWallets as $key=>$wallet)
+                            <tr>
+                              <td>{{$key}}</td>
+                              <td>{{$wallet['currency']}}</td>
+                              <td>{{$wallet['amount']}} {{$wallet['currency']}}</td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              @endif
+              @if(!isset($userWallets[0]))
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">User as no active wallets</h5>
+                    </div>
+                  </div>
+              @endif
+
+               <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Balance Management</h5>
+                  <div class="settings-profile">
+                    <form action="{{ route('updateUserWallet', $userData['id']) }}" method="post">
+
+                      @csrf
+
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <label for="confirmPass">Select Currency</label>
+                          <select id="selectCurrency" name="currency" class="custom-select" placeholder="Select Currency" required>
+                            <option selected>Select Currency</option>
+
+                            @foreach($userWallets as $key=>$wallet)
+                              <option>{{$wallet['currency']}}</option>
+                            @endforeach
+                            
+                          </select>
+                        </div>
+                         <div class="col-md-6">
+                          <label for="confirmPass">User Balance</label>
+                          <input name="amount" id="confirmPass" type="text" class="form-control" placeholder="Amount" required>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+
+                        <div class="col-md-12">
+                          <input type="submit" value="Update balance">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Edit {{$userData['fullName']}} Information</h5>
@@ -183,30 +280,6 @@
                     <form action="{{ route('updateUserProfileInfo', $userData['id']) }}" method="post" enctype="multipart/form-data">
 
                       @csrf
-
-                      <div class="row">
-                        <div class="col">
-
-                          @if(Session::get('success'))
-                            <div class="alert alert-success">
-                              {{Session::get('success')}}
-                            </div>
-                          @endif
-
-                          @if(Session::get('fail'))
-                            <div class="alert alert-danger">
-                              {{Session::get('fail')}}
-                            </div>
-                          @endif
-
-                          @if($errors->any())
-                            <div class="alert alert-danger">
-                              {{ explode('"', $errors)[3] }}
-                            </div>
-                          @endif
-
-                        </div>
-                      </div>
 
                       <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
                       <div class="custom-file">

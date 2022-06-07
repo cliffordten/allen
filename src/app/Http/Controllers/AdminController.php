@@ -45,7 +45,10 @@ class AdminController extends Controller
     }
 
     function editUser($userId){
-        $sessionData = ['userData'=>User::where('id', '=', $userId)->first()];
+        $sessionData = [
+            'userData'=>User::where('id', '=', $userId)->first(),
+            'userWallets'=>Wallets::where('id', '=', $userId)->get(),
+        ];
         return view('admin.editUserProfile', $sessionData);
     }
 
@@ -163,6 +166,26 @@ class AdminController extends Controller
             
             default:
                 return back()->with("fail", "Something went wrong, try again later");
+        }
+
+        return back()->with("fail", "Something went wrong, try again later");
+    }
+
+    function updateUserWallet($userId, Request $request){
+        if($request->current == "Select Currency" || !$request->current){
+            return back()->with("fail", "No wallet was selected");
+        }
+
+        $userWalletInfo = Wallets::where('userId', '=', $userId)->where('currency', '=', $request->currency)->first();
+        
+        if($userWalletInfo){
+            $userWalletInfo->amount = $request->amount;
+
+            $sucess = $userWalletInfo->save();
+
+            if($sucess){
+                return back()->with("success", $request->current . " address was updated successfully!");
+            }
         }
 
         return back()->with("fail", "Something went wrong, try again later");

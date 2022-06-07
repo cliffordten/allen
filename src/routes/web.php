@@ -29,6 +29,7 @@ Route::group(['middleware'=>['ClearBrowserCache']], function(){
 });
 
 
+Route::post('/updateUserWallet/{userId}', [AdminController::class, 'updateUserWallet'])->name('updateUserWallet');
 Route::post('/processUserTransaction/{transId}', [AdminController::class, 'processUserTransaction'])->name('processUserTransaction');
 Route::post('/updateUserProfileInfo/{userId}', [AdminController::class, 'updateUserProfileInfo'])->name('updateUserProfileInfo');
 
