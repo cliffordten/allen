@@ -184,7 +184,10 @@
 
                         <div class="row mb-2 justify-content-between">
                             <div class="col-6" >
-                                <h5 class="card-title  mb-2 w-2">{{$transactionDetail['transaction']['type'] == 'DEPOSIT'? 'Proof of Payment': 'Perform Action'}}</h5>
+
+                                @if($transactionDetail['transaction']['status'] == 'PENDING')
+                                  <h5 class="card-title  mb-2 w-2">{{$transactionDetail['transaction']['type'] == 'DEPOSIT'? 'Proof of Payment': 'Perform Action'}}</h5>
+                                @endif
 
                                 <div class="row">
                                     <div class="col">
@@ -213,12 +216,16 @@
                             </div>
 
                             @if($transactionDetail['transaction']['status'] == 'PENDING')
-                                <div class="col-2">
+                                <div class="col-5">
                                     <form action="{{ route('processUserTransaction', $transactionDetail['transaction']['id']) }}" method="post">
                                         @csrf
-                                        <div class="flex">
+                                        <div class="flex mb-2 mr-2" style="text-align-last:end">
                                             <button name="actionType" value="approve" type="submit" class="btn green mr-1">Approve</button>
                                             <button name="actionType" value="reject" type="submit" class="btn red">Reject</button>
+                                        </div>
+                                        <div class="flex" style="text-align-last:end">
+                                            <span class="text-white mr-2">Update amount in {{$transactionDetail['transaction']['currency']}}</span>
+                                            <input type="text" name="amount" id="amount" value="{{$transactionDetail['transaction']['amount']}}" placeholder="Update amount" style="background-color:transparent;border:1px solid #272b36;padding:6px 12px;border-radius:5px;color:#fff;margin-right:10px">
                                         </div>
                                     </form>
                                 </div>

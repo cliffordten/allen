@@ -438,9 +438,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["BTC"] as $trans)
+                                      @foreach($transactions["BTC"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} BTC</td>
@@ -759,9 +759,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["ETH"] as $trans)
+                                      @foreach($transactions["ETH"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} ETH</td>
@@ -1080,9 +1080,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["BNB"] as $trans)
+                                      @foreach($transactions["BNB"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} BNB</td>
@@ -1401,9 +1401,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["TRX"] as $trans)
+                                      @foreach($transactions["TRX"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} TRX</td>
@@ -1722,9 +1722,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["EOS"] as $trans)
+                                      @foreach($transactions["EOS"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} EOS</td>
@@ -2043,9 +2043,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["XMR"] as $trans)
+                                      @foreach($transactions["XMR"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} XMR</td>
@@ -2364,9 +2364,9 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      @foreach($transactions["KCS"] as $trans)
+                                      @foreach($transactions["KCS"] as $key=>$trans)
                                         <tr>
-                                          <td>{{$trans["id"]}}</td>
+                                          <td>{{$key}}</td>
                                           <td>{{$trans['created_at']}}</td>
                                           <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                                           <td>{{$trans['amount']}} KCS</td>

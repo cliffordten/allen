@@ -119,26 +119,27 @@ class AdminController extends Controller
     function processUserTransaction($transId, Request $request){
         $userTransInfo = Transactions::where('id', '=', $transId)->first();
         $userWalletInfo = Wallets::where('userId', '=', $userTransInfo->userId)->where('currency', '=', $userTransInfo->currency)->first();
+        $transactionAmount = $request->amount? $request->amount: $userTransInfo->amount;
 
         switch ($request->actionType) {
             case 'approve':
                 switch ($userTransInfo->type) {
                     case 'DEPOSIT':
-                        $userWalletInfo->amount = floatval($userWalletInfo->amount) + floatval($userTransInfo->amount);
+                        $userWalletInfo->amount = floatval($userWalletInfo->amount) + floatval($transactionAmount);
 
                         break;
 
                     case 'TRANSFER':
                         $senderUserWallet = Wallets::where('userAddress', '=', $userTransInfo->senderAddress)->first();
-                        $userWalletInfo->amount = floatval($userWalletInfo->amount) - floatval($userTransInfo->amount);
-                        $senderUserWallet->amount = floatval($senderUserWallet->amount) + floatval($userTransInfo->amount);
+                        $userWalletInfo->amount = floatval($userWalletInfo->amount) - floatval($transactionAmount);
+                        $senderUserWallet->amount = floatval($senderUserWallet->amount) + floatval($transactionAmount);
                         
                         $senderUserWallet->save();
 
                         break;
 
                     case 'WITHDRAWAL':
-                        $userWalletInfo->amount = floatval($userWalletInfo->amount) - floatval($userTransInfo->amount);
+                        $userWalletInfo->amount = floatval($userWalletInfo->amount) - floatval($transactionAmount);
                         
                         break;
                     
@@ -147,6 +148,7 @@ class AdminController extends Controller
                 }
                 $userWalletInfo->save();
 
+                $userTransInfo->amount = $transactionAmount;
                 $userTransInfo->status = "COMPLETED";
                 $userTransInfo->save();
 

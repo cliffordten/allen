@@ -196,9 +196,9 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($userTransactionList as $trans)
+                          @foreach($userTransactionList as $key=>$trans)
                             <tr>
-                              <td>{{$trans["id"]}}</td>
+                              <td>{{$key}}</td>
                               <td>{{$trans['created_at']}}</td>
                               <td>{{$trans['amount']}} {{$trans['currency']}}</td>
                               <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>

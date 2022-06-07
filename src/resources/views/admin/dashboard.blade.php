@@ -197,9 +197,9 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($userList as $userInfo)
+                          @foreach($userList as $key=>$userInfo)
                             <tr>
-                              <td>{{$userInfo["id"]}}</td>
+                              <td>{{$key}}</td>
                               <td>
                                  <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userInfo['profile'] ? asset($userInfo['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
                               </td>
