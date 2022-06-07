@@ -161,13 +161,13 @@
   <div class="settings mtb15">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 col-lg-3">
+       <div class="col-md-12 col-lg-3">
           <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
-            <a class="nav-link active" id="settings-wallet-tab" href="/admin/dashboard"
-            aria-controls="settings-wallet" aria-selected="true"><i class="icon ion-md-wallet"></i> Dashboard </a>
-            <a class="nav-link" id="settings-tab" href="/admin/transactionHistory"
-            aria-controls="settings" aria-selected="false"><i class="icon ion-md-settings"></i>Manage Transactions</a>
+            <a class="nav-link " id="settings-wallet-tab" href="/admin/dashboard"
+            aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i> Dashboard </a>
+            <a class="nav-link active" id="settings-tab" href="/admin/transactionHistory"
+            aria-controls="settings" aria-selected="true"><i class="icon ion-md-settings"></i>Manage Transactions</a>
             <a class="nav-link" id="settings-profile-tab" href="/admin/profile"
             aria-controls="settings-profile" aria-selected="false"><i class="icon ion-md-person"></i> Profile</a>
           </div>
@@ -177,43 +177,39 @@
             <div class="tab-pane fade show active" id="settings-profile" role="tabpanel"
               aria-labelledby="settings-profile-tab">
 
-              @if(isset($userList))
+              @if(isset($userTransactionList))
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Manage User Informations</h5>
+                    <h5 class="card-title">Manage User Transactions</h5>
                     <div class="wallet-history">
                       <table class="table">
                         <thead>
                           <tr>
                             <th>No.</th>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Language</th>
-                            <th>Base Currency</th>
-                            <th>Signup Date</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>State</th>
+                            <th>Receiver Name</th>
+                            <th>Transaction Type</th>
+                            <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($userList as $userInfo)
+                          @foreach($userTransactionList as $trans)
                             <tr>
-                              <td>{{$userInfo["id"]}}</td>
+                              <td>{{$trans["id"]}}</td>
+                              <td>{{$trans['created_at']}}</td>
+                              <td>{{$trans['amount']}} {{$trans['currency']}}</td>
+                              <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
+                              <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
+                              <td>{{$trans['type']}}</td>
+                              <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                               <td>
-                                 <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userInfo['profile'] ? asset($userInfo['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
-                              </td>
-                              <td>{{$userInfo['fullName']}}</td>
-                              <td>{{$userInfo['email']}}</td>
-                              <td>{{$userInfo['phone']? $userInfo['phone']: '---'}}</td>
-                              <td>{{$userInfo['language']? $userInfo['language']: '---'}}</td>
-                              <td>{{$userInfo['currency']? $userInfo['currency']: '---'}}</td>
-                              <td>{{$userInfo['created_at']}}</td>
-                              <td>
-                                <form action="{{ route('editUser', $userInfo->id) }}" method="get">
+                                <form action="{{ route('viewTransaction', $trans->id) }}" method="get">
                                   @csrf
                                   <div class="col-md-12">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
+                                    <input type="submit" class="btn btn-primary" value="View">
                                   </div>
                                 </form>
                               </td>
@@ -225,7 +221,7 @@
                   </div>
                 </div>
               @endif
-              @if(!isset($userList))
+              @if(!isset($userTransactionList))
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">No User Recorded</h5>
@@ -238,7 +234,6 @@
       </div>
     </div>
   </div>
-
 
   <script src="/assets/js/jquery-3.4.1.min.js"></script>
   <script src="/assets/js/popper.min.js"></script>

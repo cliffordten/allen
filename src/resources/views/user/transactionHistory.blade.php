@@ -187,11 +187,11 @@
                           <tr>
                             <th>No.</th>
                             <th>Date</th>
-                            <th>Status</th>
                             <th>Amount</th>
                             <th>State</th>
                             <th>Receiver Name</th>
                             <th>Transaction Type</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -199,11 +199,11 @@
                             <tr>
                               <td>{{$trans["id"]}}</td>
                               <td>{{$trans['created_at']}}</td>
-                              <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                               <td>{{$trans['amount']}} {{$trans['currency']}}</td>
                               <td class="{{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$trans['status']}}</td>
                               <td>{{$trans['senderName']? $trans['senderName']: '---'}}</td>
                               <td>{{$trans['type']}}</td>
+                              <td><i class="icon ion-md-checkmark-circle-outline {{$trans['status'] == 'PENDING' ? 'yellow': ($trans['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
                             </tr>
                           @endforeach
                         </tbody>

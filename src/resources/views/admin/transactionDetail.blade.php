@@ -161,13 +161,13 @@
   <div class="settings mtb15">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 col-lg-3">
+       <div class="col-md-12 col-lg-3">
           <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
-            <a class="nav-link active" id="settings-wallet-tab" href="/admin/dashboard"
-            aria-controls="settings-wallet" aria-selected="true"><i class="icon ion-md-wallet"></i> Dashboard </a>
-            <a class="nav-link" id="settings-tab" href="/admin/transactionHistory"
-            aria-controls="settings" aria-selected="false"><i class="icon ion-md-settings"></i>Manage Transactions</a>
+            <a class="nav-link " id="settings-wallet-tab" href="/admin/dashboard"
+            aria-controls="settings-wallet" aria-selected="false"><i class="icon ion-md-wallet"></i> Dashboard </a>
+            <a class="nav-link active" id="settings-tab" href="/admin/transactionHistory"
+            aria-controls="settings" aria-selected="true"><i class="icon ion-md-settings"></i>Manage Transactions</a>
             <a class="nav-link" id="settings-profile-tab" href="/admin/profile"
             aria-controls="settings-profile" aria-selected="false"><i class="icon ion-md-person"></i> Profile</a>
           </div>
@@ -177,58 +177,129 @@
             <div class="tab-pane fade show active" id="settings-profile" role="tabpanel"
               aria-labelledby="settings-profile-tab">
 
-              @if(isset($userList))
+              @if(isset($transactionDetail['transaction']))
                 <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Manage User Informations</h5>
-                    <div class="wallet-history">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>No.</th>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Language</th>
-                            <th>Base Currency</th>
-                            <th>Signup Date</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($userList as $userInfo)
-                            <tr>
-                              <td>{{$userInfo["id"]}}</td>
-                              <td>
-                                 <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userInfo['profile'] ? asset($userInfo['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
-                              </td>
-                              <td>{{$userInfo['fullName']}}</td>
-                              <td>{{$userInfo['email']}}</td>
-                              <td>{{$userInfo['phone']? $userInfo['phone']: '---'}}</td>
-                              <td>{{$userInfo['language']? $userInfo['language']: '---'}}</td>
-                              <td>{{$userInfo['currency']? $userInfo['currency']: '---'}}</td>
-                              <td>{{$userInfo['created_at']}}</td>
-                              <td>
-                                <form action="{{ route('editUser', $userInfo->id) }}" method="get">
-                                  @csrf
-                                  <div class="col-md-12">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
-                                  </div>
-                                </form>
-                              </td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
+
+                    <div class="card-body">
+
+                        <div class="row mb-2 justify-content-between">
+                            <div class="col-2" >
+                                <h5 class="card-title  mb-2 w-2">Proof of Payment</h5>
+
+                                <div class="row">
+                                    <div class="col">
+
+                                        @if(Session::get('success'))
+                                        <div class="alert alert-success">
+                                            {{Session::get('success')}}
+                                        </div>
+                                        @endif
+
+                                        @if(Session::get('fail'))
+                                        <div class="alert alert-danger">
+                                            {{Session::get('fail')}}
+                                        </div>
+                                        @endif
+
+                                        @if($errors->any())
+                                        <div class="alert alert-danger">
+                                            {{ explode('"', $errors)[3] }}
+                                        </div>
+                                        @endif
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @if($transactionDetail['transaction']['status'] == 'PENDING')
+                                <div class="col-2">
+                                    <form action="{{ route('processUserTransaction', $transactionDetail['transaction']['id']) }}" method="post">
+                                        @csrf
+                                        <div class="flex">
+                                            <button name="actionType" value="approve" type="submit" class="btn green mr-1">Approve</button>
+                                            <button name="actionType" value="reject" type="submit" class="btn red">Reject</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="wallet-history mb-4">
+                            <div class="row">
+                                <div class="col">
+                                    <img style="height:200px" class="rounded w-75" src="{{ $transactionDetail['transaction']['state'] ? asset($transactionDetail['transaction']['state']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="card-title">User Transaction Information</h5>
+
+                        <div class="wallet-history">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>State</th>
+                                    <th>Receiver Name</th>
+                                    <th>Transaction Type</th>
+                                    <th>Status</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{$transactionDetail['transaction']['created_at']}}</td>
+                                        <td>{{$transactionDetail['transaction']['amount']}} {{$transactionDetail['transaction']['currency']}}</td>
+                                        <td class="{{$transactionDetail['transaction']['status'] == 'PENDING' ? 'yellow': ($transactionDetail['transaction']['status'] == 'COMPLETED' ? 'green' : 'red') }}">{{$transactionDetail['transaction']['status']}}</td>
+                                        <td>{{$transactionDetail['transaction']['senderName']? $transactionDetail['transaction']['senderName']: '---'}}</td>
+                                        <td>{{$transactionDetail['transaction']['type']}}</td>
+                                        <td><i class="icon ion-md-checkmark-circle-outline {{$transactionDetail['transaction']['status'] == 'PENDING' ? 'yellow': ($transactionDetail['transaction']['status'] == 'COMPLETED' ? 'green' : 'red') }}"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">User Information</h5>
+                        <div class="wallet-history">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Language</th>
+                                    <th>Base Currency</th>
+                                    <th>Signup Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img style="width:55px;height:55px" class="rounded-circle" src="{{ $transactionDetail['user']['profile'] ? asset($transactionDetail['user']['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+                                        </td>
+                                        <td>{{$transactionDetail['user']['fullName']}}</td>
+                                        <td>{{$transactionDetail['user']['email']}}</td>
+                                        <td>{{$transactionDetail['user']['phone']? $transactionDetail['user']['phone']: '---'}}</td>
+                                        <td>{{$transactionDetail['user']['language']? $transactionDetail['user']['language']: '---'}}</td>
+                                        <td>{{$transactionDetail['user']['currency']? $transactionDetail['user']['currency']: '---'}}</td>
+                                        <td>{{$transactionDetail['user']['created_at']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
               @endif
-              @if(!isset($userList))
+              @if(!isset($transactionDetail['transaction']))
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">No User Recorded</h5>
+                      <h5 class="card-title">No Transaction Details Found</h5>
                     </div>
                   </div>
               @endif  
@@ -238,7 +309,6 @@
       </div>
     </div>
   </div>
-
 
   <script src="/assets/js/jquery-3.4.1.min.js"></script>
   <script src="/assets/js/popper.min.js"></script>

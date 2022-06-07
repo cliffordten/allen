@@ -50,6 +50,9 @@ class MainController extends Controller
         if(session()->has('AuthenticatedUser')){
             session()->pull('AuthenticatedUser');
         }
+        if(session()->has('transactionInfo')){
+            session()->pull('transactionInfo');
+        }
         return redirect('/login');
     }
 

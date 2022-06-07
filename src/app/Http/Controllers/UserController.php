@@ -234,6 +234,18 @@ class UserController extends Controller
             }
         }
 
+        if(session('transactionInfo') && (session('transactionInfo')["type"] == "Transfer")){
+            if(!$request->senderAddress){
+                return back()->with("fail", "Receiver Address cannot be empty!");
+            }else{
+                $senderUserWallet = Wallets::where('userAddress', '=', $request->senderAddress)->first();
+                        
+                if(!$senderUserWallet){
+                    return back()->with("fail", "Receiver Address was not found!");
+                }
+            }
+        }
+
         $transaction->userId = session('AuthenticatedUser');
         $transaction->currency = session('transactionInfo')["currency"];
         $transaction->amount = $request->amount;

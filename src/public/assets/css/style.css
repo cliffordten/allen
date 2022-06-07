@@ -19,7 +19,22 @@ body {
 }
 
 #dark .green {
-    color: #26de57;
+    color: #008b25;
+}
+
+#dark .btn.yellow {
+    background-color: #d8de26;
+    color: #fff;
+}
+
+#dark .btn.red {
+    background-color: #de2626;
+    color: #fff;
+}
+
+#dark .btn.green {
+    background-color: #008b25;
+    color: #fff;
 }
 
 a,

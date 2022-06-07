@@ -161,7 +161,7 @@
   <div class="settings mtb15">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 col-lg-3">
+       <div class="col-md-12 col-lg-3">
           <div class="nav flex-column nav-pills settings-nav" id="v-pills-tab" role="tablist"
             aria-orientation="vertical">
             <a class="nav-link active" id="settings-wallet-tab" href="/admin/dashboard"
@@ -176,69 +176,93 @@
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="settings-profile" role="tabpanel"
               aria-labelledby="settings-profile-tab">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Edit {{$userData['fullName']}} Information</h5>
+                  <div class="settings-profile">
+                    <form action="{{ route('updateUserProfileInfo', $userData['id']) }}" method="post" enctype="multipart/form-data">
 
-              @if(isset($userList))
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Manage User Informations</h5>
-                    <div class="wallet-history">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>No.</th>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Language</th>
-                            <th>Base Currency</th>
-                            <th>Signup Date</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach($userList as $userInfo)
-                            <tr>
-                              <td>{{$userInfo["id"]}}</td>
-                              <td>
-                                 <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userInfo['profile'] ? asset($userInfo['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
-                              </td>
-                              <td>{{$userInfo['fullName']}}</td>
-                              <td>{{$userInfo['email']}}</td>
-                              <td>{{$userInfo['phone']? $userInfo['phone']: '---'}}</td>
-                              <td>{{$userInfo['language']? $userInfo['language']: '---'}}</td>
-                              <td>{{$userInfo['currency']? $userInfo['currency']: '---'}}</td>
-                              <td>{{$userInfo['created_at']}}</td>
-                              <td>
-                                <form action="{{ route('editUser', $userInfo->id) }}" method="get">
-                                  @csrf
-                                  <div class="col-md-12">
-                                    <input type="submit" class="btn btn-primary" value="Edit">
-                                  </div>
-                                </form>
-                              </td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
+                      @csrf
+
+                      <div class="row">
+                        <div class="col">
+
+                          @if(Session::get('success'))
+                            <div class="alert alert-success">
+                              {{Session::get('success')}}
+                            </div>
+                          @endif
+
+                          @if(Session::get('fail'))
+                            <div class="alert alert-danger">
+                              {{Session::get('fail')}}
+                            </div>
+                          @endif
+
+                          @if($errors->any())
+                            <div class="alert alert-danger">
+                              {{ explode('"', $errors)[3] }}
+                            </div>
+                          @endif
+
+                        </div>
+                      </div>
+
+                      <img style="width:55px;height:55px" class="rounded-circle" src="{{ $userData['profile'] ? asset($userData['profile']) : asset('/assets/img/avatar.svg')}} " alt="avatar">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="profile" id="fileUpload" />
+                        <label class="custom-file-label" for="fileUpload">Choose avatar</label>
+                      </div>
+                      <div class="form-row mt-4">
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="formFirst">First name</label>
+                          <input value="{{ explode(' ', $userData['fullName'])[0] }}" id="formFirst" name="firstName" type="text" class="form-control" placeholder="First name" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="formLast">Last name</label>
+                          <input value="{{ count(explode(' ', $userData['fullName'])) > 1 ? explode(' ', $userData['fullName'])[1]: '' }}" id="formLast" name="lastName" type="text" class="form-control" placeholder="Last name">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="emailAddress">Email</label>
+                          <input value="{{ $userData['email'] }}" id="emailAddress" name="email" type="text" class="form-control" placeholder="Enter your email">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="phoneNumber">Phone</label>
+                          <input value="{{ $userData['phone'] ? $userData['phone']: '' }}" id="phoneNumber" name="phone" type="text" class="form-control" placeholder="Enter phone number">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="selectLanguage">Language</label>
+                          <select id="selectLanguage" name="language" class="custom-select" placeholder="Select Language">
+                            <option {{$userData['language'] == "Mandarin Chinese"? "selected": ""}}>Mandarin Chinese</option>
+                            <option  {{$userData['language'] == "Spanish"? "selected": ""}}>Spanish</option>
+                            <option  {{$userData['language'] == "Arabic"? "selected": ""}}>Arabic</option>
+                            <option  {{$userData['language'] == "Russian"? "selected": ""}}>Russian</option>
+                            <option {{$userData['language'] == "English"? "selected": ""}}>English</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="text-secondary" for="selectCurrency">Currency</label>
+                          <select id="selectCurrency" name="currency" class="custom-select" placeholder="Select Currency">
+                            <option {{$userData['currency'] == 'EUR'? "selected": ""}}>EUR</option>
+                            <option {{$userData['currency'] == 'GBP'? "selected": ""}}>GBP</option>
+                            <option {{$userData['currency'] == 'CHF'? "selected": ""}}>CHF</option>
+                            <option {{$userData['currency'] == 'USD'? "selected": ""}}>USD</option>
+                          </select>
+                        </div>
+                        <div class="col-md-12">
+                          <input type="submit" value="Update">
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
-              @endif
-              @if(!isset($userList))
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">No User Recorded</h5>
-                    </div>
-                  </div>
-              @endif  
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
   <script src="/assets/js/jquery-3.4.1.min.js"></script>
   <script src="/assets/js/popper.min.js"></script>
