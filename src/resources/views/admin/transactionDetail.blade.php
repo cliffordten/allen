@@ -185,9 +185,8 @@
                         <div class="row mb-2 justify-content-between">
                             <div class="col-6" >
 
-                                @if($transactionDetail['transaction']['status'] == 'PENDING')
-                                  <h5 class="card-title  mb-2 w-2">{{$transactionDetail['transaction']['type'] == 'DEPOSIT'? 'Proof of Payment': 'Perform Action'}}</h5>
-                                @endif
+                                
+                                <h5 class="card-title  mb-2 w-2">{{$transactionDetail['transaction']['type'] == 'DEPOSIT'? 'Proof of Payment': (($transactionDetail['transaction']['status'] == 'PENDING')?'Perform Action':'')}}</h5>
 
                                 <div class="row">
                                     <div class="col">
