@@ -47,7 +47,7 @@ class AdminController extends Controller
     function editUser($userId){
         $sessionData = [
             'userData'=>User::where('id', '=', $userId)->first(),
-            'userWallets'=>Wallets::where('id', '=', $userId)->get(),
+            'userWallets'=>Wallets::where('userId', '=', $userId)->get(),
         ];
         return view('admin.editUserProfile', $sessionData);
     }
@@ -172,8 +172,14 @@ class AdminController extends Controller
     }
 
     function updateUserWallet($userId, Request $request){
-        if($request->current == "Select Currency" || !$request->current){
+        \Log::info($request);
+
+        if($request->currency == "Select Currency" || !$request->currency){
             return back()->with("fail", "No wallet was selected");
+        }
+
+        if( !$request->amount){
+            return back()->with("fail", "Amount field is empty");
         }
 
         $userWalletInfo = Wallets::where('userId', '=', $userId)->where('currency', '=', $request->currency)->first();
@@ -184,7 +190,7 @@ class AdminController extends Controller
             $sucess = $userWalletInfo->save();
 
             if($sucess){
-                return back()->with("success", $request->current . " address was updated successfully!");
+                return back()->with("success", $request->currency . " address was updated successfully!");
             }
         }
 
