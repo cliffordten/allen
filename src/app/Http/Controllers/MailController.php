@@ -15,6 +15,7 @@ class MailController extends Controller
             return view('mails.welcome', ['userData'=>null, 'fail'=>'User with this email "'.$request->email.'" do not exist!', 'success'=>null]);
         }
 
+        $userInfo->isVerified = true;
         $sucess = $userInfo->save();
 
         if($sucess){

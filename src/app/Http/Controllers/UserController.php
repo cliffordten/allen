@@ -96,7 +96,7 @@ class UserController extends Controller
 
            $filePath = $file->storeAs($fileDestination, $fileName);
            
-           $fileLink = "/storage/images/profiles/" . $fileName;
+           $fileLink = "/assets/storage/images/profiles/" . $fileName;
            $userInfo->profile = $fileLink;
         }
 
@@ -219,7 +219,7 @@ class UserController extends Controller
 
            $filePath = $file->storeAs($fileDestination, $fileName);
            
-           $fileLink = "/storage/images/profiles/" . $fileName;
+           $fileLink = "/assets/storage/images/profiles/" . $fileName;
         }else{
             if(session('transactionInfo')["type"] == "Deposit"){
                 return back()->with('fail', "Proof of payment is required");

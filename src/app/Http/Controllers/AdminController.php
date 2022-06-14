@@ -104,7 +104,7 @@ class AdminController extends Controller
 
            $filePath = $file->storeAs($fileDestination, $fileName);
            
-           $fileLink = "/storage/images/profiles/" . $fileName;
+           $fileLink = "/assets/storage/images/profiles/" . $fileName;
            $userInfo->profile = $fileLink;
         }
 

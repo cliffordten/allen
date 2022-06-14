@@ -33,6 +33,6 @@ class Signup extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.verify');
+        return $this->subject('Verify Account')->view('mails.verify');
     }
 }
