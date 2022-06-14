@@ -29,8 +29,8 @@
 
 <p>Subscribe to our newsletter for weekly updates about the market and our innovations</p>
 <br>
+<a href="https://btcinvestmentportal.com/contact-us" class="primary" style="color:#fff">Subscribe</a>
 <br>
-<a href="https://btcinvestmentportal.com/contact-us" class="primary">Subscribe</a>
 <br>
 <p>Kind regards,</p>
 

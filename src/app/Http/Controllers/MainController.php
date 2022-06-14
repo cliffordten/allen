@@ -80,10 +80,11 @@ class MainController extends Controller
         $user->profile="";
         $user->password = Hash::make($request->password);
         $user->isTermsChecked = $request->isTermsChecked == 'on'? true: false;
+        $user->isVerified=false;
         $sucess = $user->save();
 
         if($sucess){
-            Mail::to($userInfo->email)->send(new Signup($userInfo->fullName, $userInfo->email));
+            Mail::to($user->email)->send(new Signup($user->fullName, $user->email));
             return back()->with("success", "Account Created! Please check your email box to verify your account.");
         }
 
