@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Signup;
 
 class MainController extends Controller
 {
@@ -81,7 +83,8 @@ class MainController extends Controller
         $sucess = $user->save();
 
         if($sucess){
-            return back()->with("success", "Account Created! You can now proceed to login");
+            Mail::to($userInfo->email)->send(new Signup($userInfo->fullName, $userInfo->email));
+            return back()->with("success", "Account Created! Please check your email box to verify your account.");
         }
 
         return back()->with("fail", "Something went wrong, try again later");
@@ -98,6 +101,11 @@ class MainController extends Controller
 
         if(!$userInfo){
             return back()->with("fail", "User with this email do not exist!");
+        }
+
+        if(!$userInfo->isVerified){
+            Mail::to($userInfo->email)->send(new Signup($userInfo->fullName, $userInfo->email));
+            return back()->with("fail", "User Email not verified, A verification mail was sent to ".$userInfo->email);
         }
 
         if(!(Hash::check($request->password, $userInfo->password))){

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('isTermsChecked');
+            $table->boolean('isVerified')->default(false);
             $table->boolean('isAdmin')->default(false);
             $table->timestamps();
         });
@@ -30,6 +31,7 @@ return new class extends Migration
                 'email' => 'admin@crypto.com',
                 'password' => Hash::make('admin@crypto.com'),
                 'isTermsChecked' => true,
+                'isVerified' => true,
                 'isAdmin' => true,
             )
         );

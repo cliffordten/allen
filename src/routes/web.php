@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
@@ -44,6 +45,7 @@ Route::post('/saveUserInfo', [MainController::class, 'saveUserInfo'])->name('sav
 Route::post('/loginUser', [MainController::class, 'loginUser'])->name('loginUser');
 Route::get('/logoutUser', [MainController::class, 'logoutUser'])->name('logoutUser');
 
+Route::get('/account/verify', [MailController::class, 'verifyAccount'])->name('verifyAccount');
 
 Route::group(['middleware'=>['AuthUser']], function(){
     Route::get('/login', [MainController::class, 'login']);

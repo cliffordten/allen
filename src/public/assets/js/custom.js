@@ -7,7 +7,7 @@
         
         setTimeout(function() {
             $(".alert.alert-success").fadeOut('fast');
-        }, 4000);
+        }, 7000);
 
     }
 
@@ -31,7 +31,7 @@
 
         setTimeout(function() {
             $(".alert.alert-danger").fadeOut('fast');
-        }, 4000);
+        }, 7000);
 
     }
 

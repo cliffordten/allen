@@ -6,7 +6,7 @@ sudo docker-compose exec mysql mysql -ucyptoProject -pcyptoProject
 cd  ~/Documents/Projects/freelance/allen
 sudo docker-compose exec php php /var/www/html/artisan migrate:fresh
 sudo docker-compose exec php php /var/www/html/artisan storage:link
-sudo docker-compose exec php php artisan make:migration add_other_users_feild --table="users"
+sudo docker-compose exec php php artisan make:migration add_isVerified_users_feild --table="users"
 
 sudo docker-compose exec mysql mysqldump -u cyptoProject -pcyptoProject cyptoProject > ./cyptoProject.sql
 
